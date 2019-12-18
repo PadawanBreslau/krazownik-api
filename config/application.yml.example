@@ -1,0 +1,8 @@
+DATABASE_DATABASE: 'kandidate_development'
+DATABASE_HOST: 'localhost'
+DATABASE_PASSWORD: 'szikaka'
+DATABASE_POOL: '5'
+DATABASE_PORT: ''
+DATABASE_USERNAME: 'staszek'
+
+CORS_ORIGINS: '*'
