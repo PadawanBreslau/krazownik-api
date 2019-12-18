@@ -1,0 +1,71 @@
+require: rubocop-rspec
+
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - '**/config.ru'
+    - '**/Rakefile'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+Style/MixinUsage:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+    - 'spec/factories/*'
+    - 'config/routes.rb'
+Metrics/AbcSize:
+  Max: 50
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 25
+Metrics/PerceivedComplexity:
+  Max: 18
+Rails:
+  Enabled: true
+RSpec/ExampleLength:
+  Max: 50
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/requests/**/*'
+    - 'spec/scenarios/**/*'
+Style/DateTime:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    '%i': ()
+    '%w': ()
+Style/RaiseArgs:
+  EnforcedStyle: compact
+Style/RegexpLiteral:
+  StyleGuide: slashes
+Style/GuardClause:
+  Enabled: false
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
