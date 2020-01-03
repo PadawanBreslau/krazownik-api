@@ -11,6 +11,7 @@ gem 'fast_jsonapi'
 gem 'figaro'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
+gem 'pundit'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 6.0.1'
 
