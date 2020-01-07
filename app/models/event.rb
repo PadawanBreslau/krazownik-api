@@ -1,3 +1,3 @@
 class Event < ApplicationRecord
-  has_many :challanges
+  has_many :challenges
 end

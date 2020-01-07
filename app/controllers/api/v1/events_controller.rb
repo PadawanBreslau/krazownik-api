@@ -5,6 +5,13 @@ module Api
       #
       def show
         year = SelectProperYearLogic.new.call
+        event = Event.find_by(year: year)
+
+        if event
+          render json: EventSerializer.new(event).serialized_json
+        else
+          p 'raise error'
+        end
       end
     end
   end
