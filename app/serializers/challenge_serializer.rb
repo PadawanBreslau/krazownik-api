@@ -5,5 +5,5 @@ class ChallengeSerializer
   set_type :challenge
   set_id :id
 
-  attributes :name, :description, :open, :points
+  attributes :title, :description, :open, :points
 end
