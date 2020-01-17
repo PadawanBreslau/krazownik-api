@@ -9,4 +9,3 @@ RSpec.describe Participation do
     expect(build(:participation, user: user, event: event)).not_to be_valid
   end
 end
-

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_132937) do
+ActiveRecord::Schema.define(version: 2020_01_13_141239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "challenge_completions", force: :cascade do |t|
+    t.bigint "participations_id"
+    t.bigint "challenges_id"
+    t.boolean "completed", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenges_id"], name: "index_challenge_completions_on_challenges_id"
+    t.index ["participations_id"], name: "index_challenge_completions_on_participations_id"
+  end
 
   create_table "challenges", force: :cascade do |t|
     t.string "title"
