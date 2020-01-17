@@ -14,6 +14,8 @@ gem 'puma', '~> 4.1'
 gem 'pundit'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 6.0.2'
+gem 'sassc-rails'
+gem 'trestle'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

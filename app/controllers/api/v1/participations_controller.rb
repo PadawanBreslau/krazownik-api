@@ -1,6 +1,6 @@
 module Api
   module V1
-    class PariticpationsController < Api::BaseController
+    class ParticipationsController < Api::BaseController
       def show
         participation = Participation.find_by(id: params[:id])
 

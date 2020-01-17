@@ -11,7 +11,7 @@ module Api
         year = SelectProperYearLogic.new.call
         event = Event.find_by(year: year)
 
-        challenges = event.challenges
+        challenges = event&.challenges
         render json: ChallengeSerializer.new(challenges).serialized_json
       end
     end
