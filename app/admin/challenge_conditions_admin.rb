@@ -1,6 +1,6 @@
-Trestle.resource(:events) do
+Trestle.resource(:challenge_conditions) do
   menu do
-    item :events, icon: 'fa fa-star'
+    item :challenge_conditions, icon: 'fa fa-star'
   end
 
   # Customize the table columns shown on the index view.
@@ -13,7 +13,7 @@ Trestle.resource(:events) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |event|
+  # form do |challenge|
   #   text_field :name
   #
   #   row do
@@ -30,6 +30,6 @@ Trestle.resource(:events) do
   #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
   #
   # params do |params|
-  #   params.require(:event).permit(:name, ...)
+  #   params.require(:challenge).permit(:name, ...)
   # end
 end

@@ -5,5 +5,7 @@ class ChallengeSerializer
   set_type :challenge
   set_id :id
 
+  has_many :challenge_conditions
+
   attributes :title, :description, :open, :points
 end

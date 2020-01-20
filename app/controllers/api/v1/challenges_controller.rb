@@ -3,8 +3,11 @@ module Api
     class ChallengesController < Api::BaseController
       def show
         challenge = Challenge.find_by(id: params[:id])
+        options = {
+          include: [:challenge_conditions]
+        }
 
-        render json: ChallengeSerializer.new(challenge).serialized_json
+        render json: ChallengeSerializer.new(challenge, options).serialized_json
       end
 
       def index
