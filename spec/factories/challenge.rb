@@ -5,5 +5,6 @@ FactoryBot.define do
     title { Faker::Lorem.word }
     description { Faker::Lorem.words(number: 10).join(' ') }
     points { 5 }
+    open { true }
   end
 end
