@@ -16,7 +16,7 @@ module Api
 
       def render_create_success
         options = {}
-        options[:meta] = { candidate_id: @resource.candidate&.id }
+        options[:meta] = { name: @resource.name }
         render json: UserSerializer.new(@resource, options).serialized_json, status: :ok
       end
 

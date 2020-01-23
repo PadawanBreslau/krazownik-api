@@ -8,6 +8,11 @@ Rails.application.routes.draw do
         passwords: 'api/v1/passwords'
       }
 
+      post 'auth/password_reset' => 'users#reset_password'
+      post 'auth/password' => 'users#update_password'
+      post 'auth/sign_up' => 'users#sign_up'
+
+
       resources :events, only: [:show]
       resources :challenges, only: [:show, :index]
     end
