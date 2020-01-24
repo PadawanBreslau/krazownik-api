@@ -12,6 +12,7 @@ class SignUpUserService
     return false if @error_msg.present?
 
     create_user
+    set_temporary_avatar
   end
 
   private
@@ -32,5 +33,9 @@ class SignUpUserService
   def create_user
     @user = User.new(@params)
     @user.save
+  end
+
+  def set_temporary_avatar
+    @user.avatar.attach(io: File.open('public/avatar.png'), filename: 'avatar.png')
   end
 end
