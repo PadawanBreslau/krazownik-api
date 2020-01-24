@@ -252,6 +252,9 @@ GEM
       kaminari (~> 1.1.0)
       railties (>= 4.2.0)
       sprockets-rails (>= 2.0.0)
+    trestle-active_storage (2.2.1)
+      rails (>= 5.2, < 7)
+      trestle (~> 0.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
@@ -293,6 +296,7 @@ DEPENDENCIES
   sassc-rails
   timecop
   trestle
+  trestle-active_storage
 
 RUBY VERSION
    ruby 2.7.0p0
