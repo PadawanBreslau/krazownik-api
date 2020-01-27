@@ -16,6 +16,10 @@ module Api
         end
       end
 
+      def panel
+        render json: UserSerializer.new(current_api_v1_user).serialized_json, status: :ok
+      end
+
       private
 
       def user_params

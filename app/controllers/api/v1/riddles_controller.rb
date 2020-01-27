@@ -2,9 +2,9 @@ module Api
   module V1
     class RiddlesController < Api::BaseController
       def show
-        challenge = Riddle.find_by(id: params[:id])
+        riddle = Riddle.find_by(id: params[:id])
 
-        render json: RiddleSerializer.new(challenge).serialized_json
+        render json: RiddleSerializer.new(riddle).serialized_json
       end
 
       def index

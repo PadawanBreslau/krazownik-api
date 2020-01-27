@@ -11,11 +11,13 @@ Rails.application.routes.draw do
       post 'auth/password_reset' => 'users#reset_password'
       post 'auth/password' => 'users#update_password'
       post 'auth/sign_up' => 'users#sign_up'
+      get 'panel' => 'users#panel'
 
 
       resources :events, only: [:show]
       resources :challenges, only: [:show, :index]
       resources :riddles, only: [:show, :index]
+      resources :teams, only: [:show, :index]
     end
   end
 end
