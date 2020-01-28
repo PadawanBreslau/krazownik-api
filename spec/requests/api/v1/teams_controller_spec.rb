@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::RiddlesController do
+describe Api::V1::TeamsController do
   describe 'show' do
     it 'shows team' do
       team = create(:team, name: 'Arsenal')

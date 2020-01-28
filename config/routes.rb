@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :challenges, only: [:show, :index]
       resources :riddles, only: [:show, :index]
       resources :teams, only: [:show, :index]
+      resources :bonus_points, only: [:show, :index]
     end
   end
 end
