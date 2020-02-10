@@ -6,6 +6,6 @@ class CreateTeams < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_column :users, :team_id, :integer
+    add_column :participations, :team_id, :integer
   end
 end

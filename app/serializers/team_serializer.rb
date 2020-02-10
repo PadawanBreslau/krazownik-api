@@ -7,5 +7,5 @@ class TeamSerializer
 
   attribute :name
 
-  has_many :users
+  has_many :participations
 end
