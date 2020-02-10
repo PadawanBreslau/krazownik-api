@@ -6,5 +6,9 @@ FactoryBot.define do
     description { Faker::Lorem.words(number: 10).join(' ') }
     points { 5 }
     open { true }
+
+    trait :hidden do
+      open { false }
+    end
   end
 end

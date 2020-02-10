@@ -58,13 +58,13 @@ ActiveRecord::Schema.define(version: 2020_01_28_081649) do
   end
 
   create_table "challenge_completions", force: :cascade do |t|
-    t.bigint "participations_id"
-    t.bigint "challenges_id"
+    t.bigint "participation_id"
+    t.bigint "challenge_id"
     t.boolean "completed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["challenges_id"], name: "index_challenge_completions_on_challenges_id"
-    t.index ["participations_id"], name: "index_challenge_completions_on_participations_id"
+    t.index ["challenge_id"], name: "index_challenge_completions_on_challenge_id"
+    t.index ["participation_id"], name: "index_challenge_completions_on_participation_id"
   end
 
   create_table "challenge_conditions", force: :cascade do |t|

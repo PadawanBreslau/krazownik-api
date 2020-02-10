@@ -1,5 +1,5 @@
 class SelectProperYearLogic
-  def call
+  def self.year
     current_date = Date.today
 
     if current_date.month < 6

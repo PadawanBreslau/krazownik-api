@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :participations
+
+  def current_participation
+    participations&.max_by { |p| p.event.year }
+  end
 end

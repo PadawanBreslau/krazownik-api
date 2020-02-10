@@ -8,7 +8,7 @@ module Api
       end
 
       def index
-        year = SelectProperYearLogic.new.call
+        year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
 
         render json: BonusPointSerializer.new(event.bonus_points).serialized_json

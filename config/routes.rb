@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
 
       resources :events, only: [:show]
-      resources :challenges, only: [:show, :index]
+      resources :challenges, only: [:show, :index] do
+        collection do
+          post :draw
+        end
+      end
       resources :riddles, only: [:show, :index]
       resources :teams, only: [:show, :index]
       resources :bonus_points, only: [:show, :index]

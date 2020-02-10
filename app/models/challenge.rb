@@ -4,4 +4,8 @@ class Challenge < ApplicationRecord
   has_many :challenge_conditions
 
   has_one_attached :icon
+
+  scope :current, ->(year) { joins(:event).where("events.year = #{year}") }
+  scope :open, -> { where('open is true') }
+  scope :hidden, -> { where('open is false') }
 end

@@ -1,5 +1,5 @@
 class ChallengeCompletion < ApplicationRecord
-  belongs_to :particpation
+  belongs_to :participation
   belongs_to :challenge
 
   validates :challenge, uniqueness: { scope: :participation, message: 'Already checked' }
