@@ -7,6 +7,7 @@ ruby '2.7.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise_token_auth'
+gem 'faker'
 gem 'fast_jsonapi'
 gem 'figaro'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -21,7 +22,6 @@ gem 'trestle-active_storage'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'faker'
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-remote'
