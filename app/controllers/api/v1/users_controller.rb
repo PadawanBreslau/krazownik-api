@@ -17,7 +17,8 @@ module Api
       end
 
       def panel
-        render json: UserSerializer.new(current_api_v1_user).serialized_json, status: :ok
+        options = { include: [:participations] }
+        render json: UserSerializer.new(current_api_v1_user, options).serialized_json, status: :ok
       end
 
       private

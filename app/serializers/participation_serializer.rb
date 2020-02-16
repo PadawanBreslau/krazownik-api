@@ -6,6 +6,17 @@ class ParticipationSerializer
   set_id :id
 
   attribute :user do |object|
-    object&.user&.name
+    object.user.name
   end
+
+  attribute :year do |object|
+    object.event.year
+  end
+
+  attribute :event_started do |object|
+    object.event.start_time && object.event.start_time < Time.current
+  end
+
+  has_many :challenges
+  has_many :challenge_completions
 end

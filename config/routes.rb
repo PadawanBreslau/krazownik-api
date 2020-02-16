@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :riddles, only: [:show, :index]
       resources :teams, only: [:show, :index]
       resources :bonus_points, only: [:show, :index]
+      resources :participations, only: [:show]
     end
   end
 end
