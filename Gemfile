@@ -10,6 +10,7 @@ gem 'devise_token_auth'
 gem 'faker'
 gem 'fast_jsonapi'
 gem 'figaro'
+gem 'mini_magick'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'pundit'
@@ -36,6 +37,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'parallel_tests'
   gem 'rspec-rails', '~> 3.5'
+  gem 'simplecov'
   gem 'timecop'
 end
 

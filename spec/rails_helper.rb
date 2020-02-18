@@ -9,6 +9,9 @@ ActiveRecord::Migration.maintain_test_schema!
 
 ActiveJob::Base.queue_adapter = :test
 
+require 'simplecov'
+SimpleCov.start
+
 RSpec.configure do |config|
   config.order = :random
 

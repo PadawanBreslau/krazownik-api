@@ -6,3 +6,4 @@ DATABASE_PORT: ''
 DATABASE_USERNAME: 'staszek'
 
 CORS_ORIGINS: '*'
+BACKEND_APP_URL: 'localhost:4321'
