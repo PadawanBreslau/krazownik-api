@@ -14,6 +14,15 @@ module Api
         participations = current_api_v1_user.participations
         render json: ParticipationSerializer.new(participations).serialized_json
       end
+
+      def create
+        participation_service = CreateParticipationService.new(user: current_api_v1_user)
+
+        if participation_service.call
+          options = { include: [:challenges, :challenge_completions] }
+          render json: ParticipationSerializer.new(participation_service.participation, options).serialized_json
+        end
+      end
     end
   end
 end

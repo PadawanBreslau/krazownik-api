@@ -16,7 +16,15 @@ module Api
         render json: ChallengeCompletionSerializer.new(challenge_completions).serialized_json
       end
 
-      def create; end
+      def create
+        challenge = Challenge.find_by(id: params[:challenge_id])
+        participation = Participation.find_by(event_id: challenge.event_id, user: current_api_v1_user)
+        toogle_service = ToogleChallengeCompletionService.new(challenge: challenge, participation: participation)
+
+        if toogle_service.call
+          render json: ChallengeCompletionSerializer.new(toogle_service.challenge_completion).serialized_json
+        end
+      end
     end
   end
 end

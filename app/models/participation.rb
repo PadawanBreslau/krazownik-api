@@ -6,5 +6,8 @@ class Participation < ApplicationRecord
   has_many :bonus_point_participations
   has_many :bonus_points, through: :bonus_point_participations
 
+  has_many_attached :photos
+  has_many_attached :track
+
   validates :user, uniqueness: { scope: :event, message: 'Already participating' }
 end
