@@ -5,7 +5,7 @@ class BonusPointSerializer
   set_type :bonus_point
   set_id :id
 
-  attribute :name, :region, :lat, :lng
+  attribute :name, :region, :lat, :lng, :points
 
   has_many :participations
 end

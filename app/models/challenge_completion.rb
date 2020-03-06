@@ -5,6 +5,6 @@ class ChallengeCompletion < ApplicationRecord
   validates :challenge, uniqueness: { scope: :participation, message: 'Already checked' }
 
   def toggle_completion
-    udpate(completed: !completed)
+    update(completed: !completed)
   end
 end

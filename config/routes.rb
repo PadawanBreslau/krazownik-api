@@ -19,6 +19,10 @@ Rails.application.routes.draw do
         collection do
           post :draw
         end
+
+        member do
+          post :toggle
+        end
       end
       resources :riddles, only: [:show, :index]
       resources :teams, only: [:show, :index]

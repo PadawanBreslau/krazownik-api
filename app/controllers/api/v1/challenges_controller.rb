@@ -1,7 +1,7 @@
 module Api
   module V1
     class ChallengesController < Api::BaseController
-      before_action :authenticate_api_v1_user!, only: [:draw]
+      before_action :authenticate_api_v1_user!, only: [:draw, :toggle]
 
       def show
         challenge = Challenge.find_by(id: params[:id])
@@ -27,6 +27,18 @@ module Api
 
         if service.call
           render json: ChallengeSerializer.new(service.challenge).serialized_json
+        else
+          render_error(status: :unprocessable_entity, title: service.error)
+        end
+      end
+
+      def toggle
+        authorize Challenge
+
+        service = ToggleChallengeService.new(user: current_api_v1_user, challenge_id: params[:id].to_i)
+
+        if service.call
+          render json: ChallengeCompletionSerializer.new(service.challenge_completion).serialized_json
         else
           render_error(status: :unprocessable_entity, title: service.error)
         end
