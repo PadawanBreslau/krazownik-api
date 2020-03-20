@@ -18,6 +18,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 6.0.2'
 gem 'sassc-rails'
 gem 'telephone_number'
+gem 'time_difference'
 gem 'trestle'
 gem 'trestle-active_storage'
 

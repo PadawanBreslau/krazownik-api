@@ -7,3 +7,4 @@ DATABASE_USERNAME: 'staszek'
 
 CORS_ORIGINS: '*'
 BACKEND_APP_URL: 'http://localhost:4321'
+SMS_TOKEN: '27069a41d37d4baaa3390adeedabe573'

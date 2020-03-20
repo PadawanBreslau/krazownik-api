@@ -10,6 +10,7 @@ class ToggleChallengeService
     find_current_participation
 
     return false unless @participation
+
     find_or_create_challenge_completion
   end
 
@@ -20,12 +21,14 @@ class ToggleChallengeService
   end
 
   def find_or_create_challenge_completion
-    @challenge_completion = ChallengeCompletion.find_by(participation_id: @participation.id, challenge_id: @challenge_id)
+    @challenge_completion = ChallengeCompletion.find_by(participation_id: @participation.id,
+                                                        challenge_id: @challenge_id)
 
     if @challenge_completion.present?
       @challenge_completion.toggle_completion
     else
-      @challenge_completion = ChallengeCompletion.create(participation_id: @participation.id, challenge_id: @challenge_id, completed: true)
+      @challenge_completion = ChallengeCompletion.create(participation_id: @participation.id,
+                                                         challenge_id: @challenge_id, completed: true)
     end
   end
 end
