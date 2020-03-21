@@ -4,6 +4,7 @@ FactoryBot.define do
     content { Faker::Lorem.words(number: 10).join(' ') }
     answer { Faker::Lorem.words(number: 10).join(' ') }
     visible_from { Time.current }
+    sent { false }
 
     event
   end

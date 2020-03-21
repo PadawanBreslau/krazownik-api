@@ -7,6 +7,8 @@ module Mailjet
     end
 
     def send
+      return if Rails.env.test?
+
       uri = URI.parse(MAILJET_URL)
       request = Net::HTTP::Post.new(uri)
       request.content_type = 'application/json'

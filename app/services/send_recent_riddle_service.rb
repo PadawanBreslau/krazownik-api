@@ -15,11 +15,11 @@ class SendRecentRiddleService
 
     riddles = event.riddles&.where(sent: false)
 
-    @riddle = riddles.find{|r| TimeDifference.between(r.visible_from, Time.current).in_minutes < 15.0 }
+    @riddle = riddles.find { |r| TimeDifference.between(r.visible_from, Time.current).in_minutes < 15.0 }
   end
 
   def send_riddle_to_all_telephones
-    PhoneNumber.all.each do |phone|
+    PhoneNumber.where(send_riddles: true).each do |phone|
       MessageSendingJob.perform_later(phone: phone, conent: @riddle.content)
     end
   end
