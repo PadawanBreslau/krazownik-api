@@ -1,4 +1,4 @@
-class PartiipationPolicy < ApplicationPolicy
+class ParticipationPolicy < ApplicationPolicy
   def create?
     true
   end
