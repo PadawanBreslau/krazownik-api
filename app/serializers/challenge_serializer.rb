@@ -1,6 +1,6 @@
 class ChallengeSerializer
   include FastJsonapi::ObjectSerializer
-  include Rails.application.routes.url_helpers
+  include ImageHelper
 
   set_key_transform :underscore
   set_type :challenge
@@ -11,10 +11,6 @@ class ChallengeSerializer
   attributes :title, :description, :open, :points
 
   attribute :icon do |object|
-    if object.icon&.attached?
-      ENV['BACKEND_APP_URL'] + Rails.application.routes.url_helpers
-                                    .rails_representation_url(object.icon.variant(resize: '100x100').processed,
-                                                              only_path: true)
-    end
+    image_path(object: object, image_field: :icon)
   end
 end

@@ -4,7 +4,7 @@ Trestle.resource(:bonus_points) do
   end
 
   active_storage_fields do
-    [:map_image]
+    [:image]
   end
 
   # Customize the table columns shown on the index view.
@@ -24,7 +24,7 @@ Trestle.resource(:bonus_points) do
     text_field :lat
     text_field :lng
 
-    active_storage_field :map_image
+    active_storage_field :image
 
     #
     #   row do
