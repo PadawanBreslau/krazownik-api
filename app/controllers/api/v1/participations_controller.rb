@@ -21,6 +21,8 @@ module Api
         if participation_service.call
           options = { include: [:challenges, :challenge_completions] }
           render json: ParticipationSerializer.new(participation_service.participation, options).serialized_json
+        else
+          render_error(status: :unprocessable_entity, title: participation_service.error)
         end
       end
     end
