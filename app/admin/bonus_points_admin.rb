@@ -7,16 +7,6 @@ Trestle.resource(:bonus_points) do
     [:image]
   end
 
-  # Customize the table columns shown on the index view.
-  #
-  # table do
-  #   column :name
-  #   column :created_at, align: :center
-  #   actions
-  # end
-
-  # Customize the form fields shown on the new/edit views.
-  #
   form do |_bonus_point|
     text_field :name
     text_field :region
@@ -25,11 +15,5 @@ Trestle.resource(:bonus_points) do
     text_field :lng
 
     active_storage_field :image
-
-    #
-    #   row do
-    #     col(xs: 6) { datetime_field :updated_at }
-    #     col(xs: 6) { datetime_field :created_at }
-    #   end
   end
 end
