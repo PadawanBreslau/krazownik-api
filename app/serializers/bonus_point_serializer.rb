@@ -6,7 +6,7 @@ class BonusPointSerializer
   set_type :bonus_point
   set_id :id
 
-  attribute :name, :region, :lat, :lng, :points
+  attribute :name, :region, :lat, :lng, :points, :completed
 
   attribute :photo do |object|
     image_path(object: object, image_field: :image, resize: '200x200')
