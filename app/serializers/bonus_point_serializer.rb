@@ -13,4 +13,5 @@ class BonusPointSerializer
   end
 
   has_many :participations
+  has_many :bonus_point_completions
 end

@@ -3,6 +3,6 @@ class BonusPointCompletion < ApplicationRecord
   belongs_to :participation
 
   def toggle
-    update(:completed, !completed)
+    update(completed: !completed)
   end
 end

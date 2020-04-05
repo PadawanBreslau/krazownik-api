@@ -3,8 +3,9 @@ module Api
     class BonusPointsController < Api::BaseController
       def show
         bonus_point = BonusPoint.find_by(id: params[:id])
+        options = { include: [:bonus_point_completions, :participations] }
 
-        render json: BonusPointSerializer.new(bonus_point).serialized_json
+        render json: BonusPointSerializer.new(bonus_point, options).serialized_json
       end
 
       def index
