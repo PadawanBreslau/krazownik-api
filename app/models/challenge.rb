@@ -17,4 +17,8 @@ class Challenge < ApplicationRecord
     icon.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'question.png')),
                 filename: 'question.png', content_type: 'image/png')
   end
+
+  def completed
+    false
+  end
 end

@@ -9,15 +9,22 @@ module Api
           include: [:challenge_conditions]
         }
 
-        render json: ChallengeSerializer.new(challenge, options).serialized_json
+        render json: ChallengeSerializer.new(presenter_challenge(challenge, current_api_v1_user),
+                                             options).serialized_json
       end
 
       def index
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
+        options = {
+          include: [:challenge_conditions, :challenge_completions]
+        }
 
-        challenges = event&.challenges&.where(open: true)
-        render json: ChallengeSerializer.new(challenges).serialized_json
+        formatted_challenges = event&.challenges&.where(open: true)&.map do |chl|
+          presenter_challenge(chl, current_api_v1_user)
+        end
+
+        render json: ChallengeSerializer.new(formatted_challenges, options).serialized_json
       end
 
       def draw
@@ -26,7 +33,8 @@ module Api
         service = DrawChallengeService.new(params: jsonapi_params.permit(:max_points), user: current_api_v1_user)
 
         if service.call
-          render json: ChallengeSerializer.new(service.challenge).serialized_json
+          render json: ChallengeSerializer.new(presenter_challenge(service.challenge,
+                                                                   current_api_v1_user)).serialized_json
         else
           render_error(status: :unprocessable_entity, title: service.error)
         end
@@ -42,6 +50,12 @@ module Api
         else
           render_error(status: :unprocessable_entity, title: service.error)
         end
+      end
+
+      private
+
+      def presenter_challenge(challenge, user)
+        ChallengePresenter.new(challenge, user_context: user)
       end
     end
   end
