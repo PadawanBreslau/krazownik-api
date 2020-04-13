@@ -19,5 +19,6 @@ class ParticipationSerializer
 
   has_many :challenges
   has_many :challenge_completions
+  has_many :bonus_points
   has_many :bonus_point_completions
 end

@@ -12,6 +12,6 @@ class BonusPointSerializer
     image_path(object: object, image_field: :image, resize: '200x200')
   end
 
-  has_many :participations
+  #  has_many :participations
   has_many :bonus_point_completions
 end
