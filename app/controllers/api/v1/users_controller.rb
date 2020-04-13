@@ -21,6 +21,18 @@ module Api
         render json: UserSerializer.new(current_api_v1_user, options).serialized_json, status: :ok
       end
 
+      def update
+        user = User.find(id: params[:id])
+
+        if user.update(user_params)
+          render json: UserSerializer.new(service.user, options).serialized_json, status: :ok
+        else
+          render_error(status: :unprocessable_entity,
+                       title: 'Wrong data',
+                       detail: user_params.to_s)
+        end
+      end
+
       private
 
       def user_params
