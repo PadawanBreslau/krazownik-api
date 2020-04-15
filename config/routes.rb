@@ -3,16 +3,16 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      post 'auth/password_reset' => 'users#reset_password'
+      post 'auth/password' => 'users#update_password'
+      post 'auth/sign_up' => 'users#sign_up'
+
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         sessions: 'api/v1/sessions',
         passwords: 'api/v1/passwords'
       }
 
-      post 'auth/password_reset' => 'users#reset_password'
-      post 'auth/password' => 'users#update_password'
-      post 'auth/sign_up' => 'users#sign_up'
       get 'panel' => 'users#panel'
-
 
       resources :users, only: [:update]
       resources :events, only: [:index]

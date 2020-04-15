@@ -11,7 +11,5 @@ class BonusPointCompletionSerializer
     object.participation.name if object.completed
   end
 
-  attribute :bonus_point_id do |object|
-    object.bonus_point_id
-  end
+  attribute :bonus_point_id, &:bonus_point_id
 end

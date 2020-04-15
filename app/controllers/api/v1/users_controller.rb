@@ -1,6 +1,9 @@
 module Api
   module V1
     class UsersController < Api::V1::BaseController
+      before_action :authenticate_api_v1_user!, only: [:panel, :update]
+      before_action :set_user!, only: [:update_password]
+
       def sign_up
         service = SignUpUserService.new(params: user_params)
 
@@ -33,7 +36,33 @@ module Api
         end
       end
 
+      def reset_password
+        authorize User
+        user = User.find_by(email: jsonapi_params[:email]&.downcase)
+        user&.send_reset_password_instructions
+        message = 'Check your email for next instructions if account exists.'
+        render_success(meta: { message: message })
+      end
+
+      def update_password
+        authorize User
+        if @user.reset_password(user_params[:password], user_params[:password_confirm])
+
+          render_success(meta: { message: 'Password updated.',
+                                 name: @user.name })
+        else
+          render_error(status: :unprocessable_entity,
+                       title: 'Wrong data',
+                       detail: @user.errors.full_messages.join(', '))
+        end
+      end
+
       private
+
+      def set_user!
+        @user = User.with_reset_password_token(request.headers['Access-Token'])
+        raise ActiveRecord::RecordNotFound unless @user
+      end
 
       def user_params
         jsonapi_params.permit(:email, :name, :password, :password_confirmation)
