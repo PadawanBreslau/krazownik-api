@@ -11,6 +11,7 @@ gem 'faker'
 gem 'fast_jsonapi'
 gem 'figaro'
 gem 'google-cloud-storage', '~> 1.11', require: false
+gem 'gpx_manipulator'
 gem 'mini_magick'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
