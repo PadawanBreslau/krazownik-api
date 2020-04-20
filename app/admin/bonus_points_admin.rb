@@ -13,6 +13,7 @@ Trestle.resource(:bonus_points) do
     text_field :points
     text_field :lat
     text_field :lng
+    select :event_id, Event.all.map(&:id), { label: "Event" }
 
     active_storage_field :image
   end
