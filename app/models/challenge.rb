@@ -1,7 +1,7 @@
 class Challenge < ApplicationRecord
   belongs_to :event
-  has_many :challenge_completions
-  has_many :challenge_conditions
+  has_many :challenge_completions, dependent: :destroy
+  has_many :challenge_conditions, dependent: :destroy
 
   has_one_attached :icon
 

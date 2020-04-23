@@ -18,7 +18,7 @@ class DrawChallengeService
   private
 
   def extract_crucial_data
-    max_points = @params[:max_points].to_i
+    max_points = (@params[:max_points] || 3).to_i
 
     @participation = @user.current_participation
     (@error = 'No participation found') && return unless @participation
