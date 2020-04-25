@@ -9,6 +9,7 @@ Trestle.resource(:teams) do
 
   form do |_bonus_point|
     text_field :name
+    select :event_id, Event.all.map(&:id), label: 'Event'
     active_storage_field :emblem
   end
 end
