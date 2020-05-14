@@ -1,9 +1,9 @@
 class Participation < ApplicationRecord
   belongs_to :event
   belongs_to :user
-  has_many :challenge_completions
+  has_many :challenge_completions, dependent: :destroy
   has_many :challenges, through: :challenge_completions
-  has_many :bonus_point_completions
+  has_many :bonus_point_completions, dependent: :destroy
   has_many :bonus_points, through: :event
 
   has_many_attached :photos
