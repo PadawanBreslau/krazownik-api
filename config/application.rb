@@ -25,6 +25,8 @@ module KrazownikApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.i18n.default_locale = :pl
+    config.time_zone = 'Warsaw'
     config.active_job.queue_adapter = :sidekiq if Rails.env.production?
     config.eager_load_paths << Rails.root.join('lib')
 
