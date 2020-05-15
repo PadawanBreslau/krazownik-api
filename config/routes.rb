@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
@@ -36,4 +38,5 @@ Rails.application.routes.draw do
       resources :participations, only: [:show, :index, :create]
     end
   end
+  mount Sidekiq::Web, at: '/sidekiq_monitor'
 end
