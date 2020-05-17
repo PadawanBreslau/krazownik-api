@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :participations, dependent: :nullify
+  has_many :participations, dependent: :destroy
 
   def current_participation
     participations&.max_by { |p| p.event.year }
