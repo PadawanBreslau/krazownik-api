@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Api::V1::RiddlesController do
   describe 'show' do
     it 'shows challange' do
-      riddle = create(:riddle, title: 'Ile lat ma Grześ?')
+      riddle = create(:riddle, title: 'Ile lat ma Grześ?', sponsor: 'Microsoft')
       get "/api/v1/riddles/#{riddle.id}", headers: json_api_headers
       expect(response).to have_http_status :ok
 
@@ -11,6 +11,7 @@ describe Api::V1::RiddlesController do
       expect(body['attributes']['title']).to eq 'Ile lat ma Grześ?'
       expect(body['attributes']['content']).to be_present
       expect(body['attributes']['answer']).to be_nil
+      expect(body['attributes']['sponsor']).to eq 'Microsoft'
     end
 
     it 'doesnt show question when the time is not reached' do

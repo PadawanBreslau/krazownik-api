@@ -5,7 +5,7 @@ class RiddleSerializer
   set_type :riddle
   set_id :id
 
-  attributes :title, :visible_from
+  attributes :title, :visible_from, :sponsor
 
   attributes :content do |object|
     object['content'] if object['visible_from'] < Time.current
