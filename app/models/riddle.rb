@@ -1,4 +1,4 @@
 class Riddle < ApplicationRecord
-  default_scope { order('visible_from DESC') }
+  default_scope { order('visible_from ASC') }
   belongs_to :event
 end
