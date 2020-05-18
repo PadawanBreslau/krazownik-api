@@ -17,6 +17,7 @@ class ParticipationSerializer
     object.event.start_time && object.event.start_time < Time.current
   end
 
+  has_one :extra
   has_many :challenges
   has_many :challenge_completions
   has_many :bonus_points

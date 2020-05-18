@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_18_084526) do
+ActiveRecord::Schema.define(version: 2020_05_18_131944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,14 @@ ActiveRecord::Schema.define(version: 2020_05_18_084526) do
     t.datetime "start_time"
   end
 
+  create_table "extras", force: :cascade do |t|
+    t.bigint "participation_id", null: false
+    t.float "points"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["participation_id"], name: "index_extras_on_participation_id"
+  end
+
   create_table "participations", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
@@ -172,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_05_18_084526) do
   add_foreign_key "bonus_points", "events"
   add_foreign_key "challenge_conditions", "challenges"
   add_foreign_key "challenges", "events"
+  add_foreign_key "extras", "participations"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
 end

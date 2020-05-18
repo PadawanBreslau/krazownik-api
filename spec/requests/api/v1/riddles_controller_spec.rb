@@ -45,8 +45,8 @@ describe Api::V1::RiddlesController do
       expect(response).to have_http_status :ok
 
       body = JSON.parse(response.body)['data']
-      expect(body.first['attributes']['title']).to eq 'W którą stronę?'
-      expect(body.last['attributes']['title']).to eq 'Jaki jest wynik?'
+      expect(body.last['attributes']['title']).to eq 'W którą stronę?'
+      expect(body.first['attributes']['title']).to eq 'Jaki jest wynik?'
     end
   end
 end
