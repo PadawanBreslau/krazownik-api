@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
       resources :users, only: [:update]
       resources :events, only: [:index]
+      resources :notes, only: [:index]
       resources :challenges, only: [:show, :index] do
         collection do
           post :draw
