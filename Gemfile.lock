@@ -329,6 +329,9 @@ GEM
     trestle-active_storage (2.2.1)
       rails (>= 5.2, < 7)
       trestle (~> 0.8)
+    trestle-auth (0.4.0)
+      bcrypt (~> 3.1.7)
+      trestle (~> 0.9.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
@@ -379,6 +382,7 @@ DEPENDENCIES
   timecop
   trestle
   trestle-active_storage
+  trestle-auth
 
 RUBY VERSION
    ruby 2.7.0p0

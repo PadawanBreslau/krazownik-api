@@ -24,6 +24,7 @@ gem 'telephone_number'
 gem 'time_difference'
 gem 'trestle'
 gem 'trestle-active_storage'
+gem 'trestle-auth'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
