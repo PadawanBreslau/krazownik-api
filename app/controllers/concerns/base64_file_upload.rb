@@ -7,7 +7,7 @@ module Base64FileUpload
     filename = save_file_on_server(file_params)
     file_full_path = "#{Rails.root}/tmp/#{filename}"
 
-    object.send(file).purge # Delete previous one
+ #   object.send(file).purge # Delete previous one
     object.send(file).attach(
       io: File.open(file_full_path),
       filename: filename

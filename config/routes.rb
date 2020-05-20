@@ -30,7 +30,11 @@ Rails.application.routes.draw do
       end
       resources :riddles, only: [:show, :index]
       resources :teams, only: [:show, :index]
-      resources :files, only: [:index]
+      resources :files, only: [:index] do
+        collection do
+          post :upload
+        end
+      end
       resources :bonus_points, only: [:show, :index] do
         member do
           post :toggle

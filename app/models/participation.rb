@@ -9,7 +9,7 @@ class Participation < ApplicationRecord
   has_one :extra
 
   has_many_attached :photos
-  has_many_attached :track
+  has_many_attached :tracks
 
   validates :user, uniqueness: { scope: :event, message: 'Already participating' }
   delegate :name, to: :user
