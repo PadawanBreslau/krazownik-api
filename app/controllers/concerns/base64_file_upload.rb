@@ -6,8 +6,9 @@ module Base64FileUpload
   def update_file(object, file_params, file)
     filename = save_file_on_server(file_params)
     file_full_path = "#{Rails.root}/tmp/#{filename}"
+    save_track(object, file_full_path) if gpx?(filename)
 
- #   object.send(file).purge # Delete previous one
+    #   object.send(file).purge # Delete previous one
     object.send(file).attach(
       io: File.open(file_full_path),
       filename: filename
@@ -20,6 +21,19 @@ module Base64FileUpload
   VALID_FORMAT_REGEXP = /#{MIME_TYPE_PREFIX}[a-z]{3,}/.freeze
   def valid_format?(format)
     format.nil? || format.match?(VALID_FORMAT_REGEXP)
+  end
+
+  def gpx?(filename)
+    File.extname(filename).strip.downcase[1..-1] == 'gpx'
+  end
+
+  def save_track(object, path)
+    read_file = ReadGpx.new(file: path)
+    read_file.read
+
+    read_file.tracks.each do |track|
+      SaveTrackService.new(participation: object, track: Track.new(track: track)).call
+    end
   end
 
   # data removal of e.g. "data:application/pdf;base64,"

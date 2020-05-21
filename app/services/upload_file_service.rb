@@ -1,7 +1,8 @@
 class UploadFileService
   include Base64FileUpload
 
-  def initialize(user: , params:)
+  attr_reader :errors
+  def initialize(user:, params:)
     @user = user
     @params = params
   end
@@ -17,16 +18,17 @@ class UploadFileService
     elsif @gpx
       upload_track
     else
-      false
+      return false
     end
+    true
   end
 
   private
 
   def check_extension
-    content_type = @params.dig("file", "content_type")
-    @picture = true if  content_type == 'image/png' || content_type == 'image/jpeg'
-    @gpx = true if  content_type == "application/gpx+xml"
+    content_type = @params.dig('file', 'content_type')
+    @picture = true if content_type.in? ['image/png', 'image/jpeg']
+    @gpx = true if  content_type == 'application/gpx+xml'
   end
 
   def find_current_participation

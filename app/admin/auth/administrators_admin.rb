@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 Trestle.resource(:administrators, model: Administrator, scope: Auth) do
   menu do
     group :configuration, priority: :last do
@@ -31,3 +32,4 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

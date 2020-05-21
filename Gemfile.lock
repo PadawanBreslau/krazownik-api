@@ -132,7 +132,7 @@ GEM
     gpx (1.0.0)
       nokogiri (~> 1.7)
       rake
-    gpx_manipulator (0.1.0)
+    gpx_manipulator (0.2.1)
       geokit (= 1.13)
       gpx (= 1.0)
     httpclient (2.8.3)
@@ -178,7 +178,7 @@ GEM
     multi_json (1.14.1)
     multipart-post (2.1.1)
     nio4r (2.5.2)
-    nokogiri (1.10.7)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     os (1.1.0)
@@ -355,7 +355,7 @@ DEPENDENCIES
   fast_jsonapi
   figaro
   google-cloud-storage (~> 1.11)
-  gpx_manipulator
+  gpx_manipulator (~> 0.2)
   letter_opener
   listen (>= 3.0.5, < 3.2)
   mini_magick

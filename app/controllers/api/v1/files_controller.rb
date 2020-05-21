@@ -9,11 +9,10 @@ module Api
         service = UploadFileService.new(user: current_api_v1_user, params: upload_file_params)
 
         if service.call
-          render json: {}
+          render json: {}, status: :ok
         else
-          render json: ErrorSerializer.serialize(@candidate.errors), status: :unprocessable_entity
+          render json: ErrorSerializer.serialize(service.errors), status: :unprocessable_entity
         end
-
       end
 
       def upload_file_params

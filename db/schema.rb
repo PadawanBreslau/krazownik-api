@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_093229) do
+ActiveRecord::Schema.define(version: 2020_05_21_110505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,15 @@ ActiveRecord::Schema.define(version: 2020_05_19_093229) do
     t.index ["participation_id"], name: "index_extras_on_participation_id"
   end
 
+  create_table "gpx_tracks", force: :cascade do |t|
+    t.bigint "participation_id", null: false
+    t.float "total_ascent"
+    t.float "total_distance"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["participation_id"], name: "index_gpx_tracks_on_participation_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -199,6 +208,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_093229) do
   add_foreign_key "challenge_conditions", "challenges"
   add_foreign_key "challenges", "events"
   add_foreign_key "extras", "participations"
+  add_foreign_key "gpx_tracks", "participations"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
 end
