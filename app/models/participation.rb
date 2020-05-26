@@ -13,4 +13,8 @@ class Participation < ApplicationRecord
 
   validates :user, uniqueness: { scope: :event, message: 'Already participating' }
   delegate :name, to: :user
+
+  def files
+    photos + tracks
+  end
 end

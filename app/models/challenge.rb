@@ -1,4 +1,5 @@
 class Challenge < ApplicationRecord
+  default_scope { order('points ASC') }
   belongs_to :event
   has_many :challenge_completions, dependent: :destroy
   has_many :challenge_conditions, dependent: :destroy
