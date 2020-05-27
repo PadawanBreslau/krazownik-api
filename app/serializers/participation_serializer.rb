@@ -17,6 +17,8 @@ class ParticipationSerializer
     object.event.start_time && object.event.start_time < Time.current
   end
 
+  attributes :total_distance_points, :total_ascent_points
+
   has_one :extra
   has_many :challenges
   has_many :challenge_completions
