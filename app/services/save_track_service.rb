@@ -18,14 +18,14 @@ class SaveTrackService
   end
 
   def save_averaged_points
-    @track_averaged_point.each do |point|
+    @track.averaged_points.each do |point|
       existing_point = find_nearby_averaged_point(point)
       existing_point.present? ? update_current_point(existing_point) : create_point(point)
     end
   end
 
   def find_nearby_averaged_point(point)
-    GpxPoint.all.find { |saved_point| saved_point.close_enough?(point.lat, point.lng) }
+    GpxPoint.all.find { |saved_point| saved_point.close_enough?(point.first, point.last) }
   end
 
   def update_current_point(point)
@@ -34,7 +34,7 @@ class SaveTrackService
   end
 
   def create_point(point)
-    gpx_point = GpxPoint.create(lat: point.lat, lng: point.lng)
+    gpx_point = GpxPoint.create(lat: point.first, lgt: point.last)
     @participation.gpx_points << gpx_point
   end
 end
