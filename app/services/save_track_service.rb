@@ -34,7 +34,7 @@ class SaveTrackService
   end
 
   def create_point(point)
-    gpx_point = GpxPoint.create(lat: point.first, lgt: point.last)
+    gpx_point = GpxPoint.create(lat: point.first, lng: point.last)
     @participation.gpx_points << gpx_point
   end
 end

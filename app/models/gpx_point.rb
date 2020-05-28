@@ -3,17 +3,17 @@ class GpxPoint < ApplicationRecord
 
   has_and_belongs_to_many :participations
 
-  def close_enough?(lat, lgt)
-    Geokit::LatLng.new(self.lat, self.lgt)
-                  .distance_to("#{lat}, #{lgt}").round(2) < SAME_POINT_APPROXIMATION_DISTANCE
+  def close_enough?(lat, lng)
+    Geokit::LatLng.new(self.lat, self.lng)
+                  .distance_to("#{lat}, #{lng}").round(2) < SAME_POINT_APPROXIMATION_DISTANCE
   end
 
   def color
-    "#{green}FF00"
+    "##{green}#{green}FF"
   end
 
   def green
-    val = [(0xFF - counter * 12), 0].max
-    val > 9 ? val.to_s(16):  "0#{val}"
+    val = [(0xAA - counter * 12), 0].max
+    val > 9 ? val.to_s(16) : "0#{val}"
   end
 end

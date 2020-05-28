@@ -2,7 +2,7 @@ class CreateGpxPoints < ActiveRecord::Migration[6.0]
   def change
     create_table :gpx_points do |t|
       t.float :lat
-      t.float :lgt
+      t.float :lng
       t.integer :counter, default: 1, null: false
 
       t.timestamps

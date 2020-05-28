@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2020_05_28_050459) do
 
   create_table "gpx_points", force: :cascade do |t|
     t.float "lat"
-    t.float "lgt"
+    t.float "lng"
     t.integer "counter", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

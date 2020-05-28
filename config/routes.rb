@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         end
       end
       resources :participations, only: [:show, :index, :create]
+      resources :gpx_points, only: [:index]
     end
   end
   mount Sidekiq::Web, at: '/sidekiq_monitor'
