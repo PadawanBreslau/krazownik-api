@@ -354,6 +354,7 @@ DEPENDENCIES
   faker
   fast_jsonapi
   figaro
+  geokit
   google-cloud-storage (~> 1.11)
   gpx_manipulator (~> 0.2)
   letter_opener

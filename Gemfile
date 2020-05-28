@@ -10,6 +10,7 @@ gem 'devise_token_auth'
 gem 'faker'
 gem 'fast_jsonapi'
 gem 'figaro'
+gem 'geokit'
 gem 'google-cloud-storage', '~> 1.11', require: false
 gem 'gpx_manipulator', '~> 0.2'
 gem 'mini_magick'
