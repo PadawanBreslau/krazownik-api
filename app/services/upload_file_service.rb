@@ -20,6 +20,7 @@ class UploadFileService
     else
       return false
     end
+
     true
   end
 

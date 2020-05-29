@@ -8,7 +8,7 @@ class RiddleSerializer
   attributes :title, :visible_from, :sponsor
 
   attributes :content do |object|
-    object['content'] if object['visible_from'] < Time.current
+    object['content'] if object['visible_from'] < Time.current - 10.minutes
   end
 
   attributes :answer do |object|

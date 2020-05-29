@@ -5,7 +5,7 @@ module Api
         participation = Participation.find_by(id: params[:id])
 
         if participation.user == current_api_v1_user
-          options = { include: [:extra, :challenges, :challenge_completions, :bonus_points, :bonus_point_completions] }
+          options = { include: [:gpx_points, :extra, :challenges, :challenge_completions, :bonus_points, :bonus_point_completions] }
           render json: ParticipationSerializer.new(participation, options).serialized_json
         end
       end
