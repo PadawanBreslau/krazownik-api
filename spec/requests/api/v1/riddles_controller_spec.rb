@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe Api::V1::RiddlesController do
   describe 'show' do
-    it 'shows challange' do
-      riddle = create(:riddle, title: 'Ile lat ma Grześ?', sponsor: 'Microsoft')
+    it 'shows riddle' do
+      riddle = create(:riddle, title: 'Ile lat ma Grześ?',
+                               sponsor: 'Microsoft', visible_from: Time.current - 11.minutes)
       get "/api/v1/riddles/#{riddle.id}", headers: json_api_headers
       expect(response).to have_http_status :ok
 

@@ -20,6 +20,7 @@ class ParticipationSerializer
   attributes :total_distance_points, :total_ascent_points
 
   has_one :extra
+  has_one :team
   has_many :challenges
   has_many :challenge_completions
   has_many :bonus_points
