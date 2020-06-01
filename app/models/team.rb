@@ -3,4 +3,12 @@ class Team < ApplicationRecord
   belongs_to :event
 
   has_one_attached :emblem
+
+  def photos
+    ActiveStorage::Attachment.where(name: 'photos', record_type: 'Participation', record_id: participations.map(&:id))
+  end
+
+  def photo_ids
+    photos.map(&:id)
+  end
 end

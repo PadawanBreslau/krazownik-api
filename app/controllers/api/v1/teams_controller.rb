@@ -3,7 +3,7 @@ module Api
     class TeamsController < Api::BaseController
       def show
         team = Team.find_by(id: params[:id])
-        options = { include: [:participations] }
+        options = { include: [:participations, :photos] }
 
         render json: TeamSerializer.new(team, options).serialized_json
       end

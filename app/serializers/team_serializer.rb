@@ -7,9 +7,11 @@ class TeamSerializer
   set_id :id
 
   attribute :name
+
   attribute :emblem do |object|
     image_path(object: object, image_field: :emblem, resize: '200x200')
   end
 
   has_many :participations
+  has_many :photos
 end
