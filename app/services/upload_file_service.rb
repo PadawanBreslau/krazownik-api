@@ -29,7 +29,7 @@ class UploadFileService
   def check_extension
     content_type = @params.dig('file', 'content_type')
     @picture = true if content_type.in? ['image/png', 'image/jpeg']
-    @gpx = true if  content_type == 'application/gpx+xml'
+    @gpx = true # if  content_type == 'application/gpx+xml'
   end
 
   def find_current_participation
