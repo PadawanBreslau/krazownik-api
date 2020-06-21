@@ -4,6 +4,8 @@ class Event < ApplicationRecord
   has_many :bonus_points
   has_many :riddles
 
+  scope :recent, -> { where('? >  start_time', Time.current.to_date).order('start_time DESC').first }
+
   def photos
     participations.map(&:photos).flatten
   end

@@ -9,12 +9,23 @@ class Participation < ApplicationRecord
   has_many :gpx_tracks, dependent: :destroy
   has_and_belongs_to_many :gpx_points, dependent: :destroy
   has_one :extra, dependent: :destroy
+  has_one :result, dependent: :destroy
 
   has_many_attached :photos
   has_many_attached :tracks
 
   validates :user, uniqueness: { scope: :event, message: 'Already participating' }
   delegate :name, to: :user
+
+  after_commit :create_or_update_results
+
+  def create_or_update_results
+    logic = ResultCalculator.new(participation: self)
+    if logic.call
+      result&.destroy
+      CreateResultService.new(participation: self, result: logic.result, total: logic.total)
+    end
+  end
 
   def total_distance_points
     gpx_tracks.map { |track| track.total_distance * track.multiplier }.inject(:+).to_i

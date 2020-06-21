@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_050459) do
+ActiveRecord::Schema.define(version: 2020_06_21_214117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,15 @@ ActiveRecord::Schema.define(version: 2020_05_28_050459) do
     t.boolean "send_messages", default: true
   end
 
+  create_table "results", force: :cascade do |t|
+    t.bigint "participation_id", null: false
+    t.jsonb "result"
+    t.float "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["participation_id"], name: "index_results_on_participation_id"
+  end
+
   create_table "riddles", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -239,4 +248,5 @@ ActiveRecord::Schema.define(version: 2020_05_28_050459) do
   add_foreign_key "gpx_tracks", "participations"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
+  add_foreign_key "results", "participations"
 end
