@@ -23,7 +23,7 @@ class Participation < ApplicationRecord
     logic = ResultCalculator.new(participation: self)
     if logic.call
       result&.destroy
-      CreateResultService.new(participation: self, result: logic.result, total: logic.total)
+      CreateResultService.new(participation: self, result: logic.result, total: logic.total).call
     end
   end
 

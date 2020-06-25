@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         end
       end
       resources :riddles, only: [:show, :index]
+      resources :results, only: [:index]
       resources :teams, only: [:show, :index]
       resources :photos, only: [:index]
       resources :files, only: [:index] do
