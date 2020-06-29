@@ -21,10 +21,10 @@ describe Api::V1::ResultsController do
 
       body = JSON.parse(response.body)['data']
       expect(body.size).to eq 2
-      expect(body.first.dig('attributes', 'total')).to eq 5.0
-      expect(body.first.dig('attributes', 'result', 'points_from_bonus_points')).to eq 5.0
-      expect(body.last.dig('attributes', 'total')).to eq 8.0
-      expect(body.last.dig('attributes', 'result', 'points_from_bonus_points')).to eq 8.0
+      expect(body.first.dig('attributes', 'total')).to eq 8.0
+      expect(body.first.dig('attributes', 'result', 'points_from_bonus_points')).to eq 8.0
+      expect(body.last.dig('attributes', 'total')).to eq 5.0
+      expect(body.last.dig('attributes', 'result', 'points_from_bonus_points')).to eq 5.0
     end
 
     it 'shows results - challenges' do
