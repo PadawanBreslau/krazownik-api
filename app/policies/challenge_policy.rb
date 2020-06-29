@@ -3,7 +3,7 @@ class ChallengePolicy < ApplicationPolicy
     true
   end
 
-  def toggle?
+  def toggle_completion?
     true
   end
 end

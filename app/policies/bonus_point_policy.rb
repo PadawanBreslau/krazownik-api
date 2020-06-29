@@ -1,5 +1,5 @@
 class BonusPointPolicy < ApplicationPolicy
-  def toggle?
+  def toggle_completion?
     true
   end
 end

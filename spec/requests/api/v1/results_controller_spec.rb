@@ -58,8 +58,8 @@ describe Api::V1::ResultsController do
       p1 = create(:participation, event: event)
       p2 = create(:participation, event: event)
 
-      c1 = create(:extra, participation: p1, points: 24)
-      c2 = create(:extra, participation: p2, points: 16)
+      create(:extra, participation: p1, points: 24)
+      create(:extra, participation: p2, points: 16)
 
       p1.touch
       p2.touch
@@ -81,7 +81,7 @@ describe Api::V1::ResultsController do
 
       b1 = create(:bonus_point, event: event)
       c1 = create(:challenge, event: event, points: 8)
-      e1 = create(:extra, participation: p1, points: 24)
+      create(:extra, participation: p1, points: 24)
 
       create :challenge_completion, participation: p1, challenge: c1
       create :bonus_point_completion, participation: p1, bonus_point: b1

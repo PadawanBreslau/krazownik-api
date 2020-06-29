@@ -21,6 +21,6 @@ class ToggleBonusPointService
   def toggle_bonus_point_completion
     bonus_point_completion = BonusPointCompletion.find_or_create_by(participation_id: @participation.id,
                                                                     bonus_point_id: @bonus_point.id)
-    bonus_point_completion.toggle
+    bonus_point_completion.toggle_completion
   end
 end
