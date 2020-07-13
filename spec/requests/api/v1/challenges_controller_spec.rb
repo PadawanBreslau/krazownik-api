@@ -14,7 +14,7 @@ describe Api::V1::ChallengesController do
 
   describe 'index' do
     it 'shows challange' do
-      event = create(:event, year: Date.current.year)
+      event = create(:event, year: SelectProperYearLogic.year)
       create(:challenge, title: 'W kupie siła', event: event)
       create(:challenge, title: 'Ten typ tak ma', event: event)
       get '/api/v1/challenges', headers: json_api_headers
@@ -29,7 +29,7 @@ describe Api::V1::ChallengesController do
   describe 'draw' do
     it 'draws a challenge' do
       user = create(:user)
-      event = create(:event, year: Date.current.year)
+      event = create(:event, year: SelectProperYearLogic.year)
       create(:participation, event: event, user: user)
       create(:challenge, :hidden,  title: 'W kupie siła', event: event, points: 12)
       create(:challenge, :hidden,  title: 'Ten typ tak ma', event: event, points: 8)
@@ -47,7 +47,7 @@ describe Api::V1::ChallengesController do
 
     it 'doesnt redraw challenge' do
       user = create(:user)
-      event = create(:event, year: Date.current.year)
+      event = create(:event, year: SelectProperYearLogic.year)
       create(:participation, event: event, user: user)
       create(:challenge, :hidden, title: 'W kupie siła', event: event, points: 12)
 
@@ -64,7 +64,7 @@ describe Api::V1::ChallengesController do
 
     it 'wont draw challenge with more points' do
       user = create(:user)
-      event = create(:event, year: Date.current.year)
+      event = create(:event, year: SelectProperYearLogic.year)
       create(:participation, event: event, user: user)
       create(:challenge, :hidden, title: 'W kupie siła', event: event, points: 12)
 
@@ -78,7 +78,7 @@ describe Api::V1::ChallengesController do
 
     it 'create challenge completion' do
       user = create(:user)
-      event = create(:event, year: Date.current.year)
+      event = create(:event, year: SelectProperYearLogic.year)
       create(:participation, event: event, user: user)
       create(:challenge, :hidden,  title: 'W kupie siła', event: event, points: 12)
       create(:challenge, :hidden,  title: 'Ten typ tak ma', event: event, points: 8)

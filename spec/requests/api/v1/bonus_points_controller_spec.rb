@@ -14,7 +14,7 @@ describe Api::V1::BonusPointsController do
 
   describe 'index' do
     it 'shows bonus_points' do
-      event = create(:event, year: 2020)
+      event = create(:event, year: SelectProperYearLogic.year)
       create(:bonus_point, name: 'Trzy Korony', region: 'Pieniny', event: event)
       create(:bonus_point, name: 'Turbacz', region: 'Gorce', event: event)
       get '/api/v1/bonus_points/', headers: json_api_headers
