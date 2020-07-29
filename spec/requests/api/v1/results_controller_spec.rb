@@ -7,7 +7,7 @@ describe Api::V1::ResultsController do
       p1 = create(:participation, event: event)
       p2 = create(:participation, event: event)
 
-      b1 = create(:bonus_point, event: event)
+      b1 = create(:bonus_point, event: event, points: 5)
       b2 = create(:bonus_point, event: event, points: 8)
 
       create :bonus_point_completion, participation: p1, bonus_point: b1
@@ -79,7 +79,7 @@ describe Api::V1::ResultsController do
       event = create(:event, start_time: Time.current - 10.days)
       p1 = create(:participation, event: event)
 
-      b1 = create(:bonus_point, event: event)
+      b1 = create(:bonus_point, event: event, points: 5)
       c1 = create(:challenge, event: event, points: 8)
       create(:extra, participation: p1, points: 24)
 

@@ -6,7 +6,22 @@ class BonusPoint < ApplicationRecord
 
   has_one_attached :image
 
+  validate :point_already_near
+
   def completed
     false
+  end
+
+  def point_already_near
+    errors.add(:lat, 'Point already defined in this area') if too_close?
+  end
+
+  private
+
+  def too_close?
+    BonusPoint.where(event_id: event_id).any? do |bp|
+      Geokit::LatLng.new(lat, lng)
+                    .distance_to("#{bp.lat}, #{bp.lng}") < 1.0
+    end
   end
 end

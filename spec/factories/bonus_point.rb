@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :bonus_point do
     name { Faker::Lorem.word }
-    lng { 0.0 }
-    lat { 0.0 }
-    points { 5 }
+    lng { rand * 10 }
+    lat { rand * 20 }
+    points { rand(15) }
 
     event
   end
