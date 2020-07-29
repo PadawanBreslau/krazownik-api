@@ -3,7 +3,7 @@ Trestle.resource(:bonus_points) do
   scope :following, dafault: true
 
   menu do
-    item :bonus_points, icon: 'fa fa-star'
+    item :bonus_points, icon: 'fa fa-exclamation'
   end
 
   active_storage_fields do

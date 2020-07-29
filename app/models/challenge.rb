@@ -8,9 +8,10 @@ class Challenge < ApplicationRecord
 
   before_save :attach_default_icon
 
+  scope :following, -> { where(event_id: Event.following.id) }
   scope :current, ->(year) { joins(:event).where("events.year = #{year}") }
-  scope :open, -> { where('open is true') }
-  scope :hidden, -> { where('open is false') }
+  scope :open, -> { where("open is true AND event_id = #{Event.following.id}") }
+  scope :hidden, -> { where("open is false AND event_id = #{Event.following.id}") }
 
   def attach_default_icon
     return if icon.attached?
