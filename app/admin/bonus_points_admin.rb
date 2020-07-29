@@ -1,4 +1,7 @@
 Trestle.resource(:bonus_points) do
+  scope :all
+  scope :following, dafault: true
+
   menu do
     item :bonus_points, icon: 'fa fa-star'
   end

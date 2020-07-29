@@ -8,6 +8,10 @@ class Event < ApplicationRecord
     where('? >  start_time', Time.current.to_date).order('start_time DESC').first
   end
 
+  def self.following
+    where('? <  start_time', Time.current.to_date).order('start_time DESC').first
+  end
+
   def photos
     participations.map(&:photos).flatten
   end

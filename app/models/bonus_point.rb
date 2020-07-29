@@ -8,6 +8,8 @@ class BonusPoint < ApplicationRecord
 
   validate :point_already_near
 
+  scope :following, -> { where(event_id: Event.following.id) }
+
   def completed
     false
   end
