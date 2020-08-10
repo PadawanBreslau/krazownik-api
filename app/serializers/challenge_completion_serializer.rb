@@ -6,4 +6,8 @@ class ChallengeCompletionSerializer
   set_id :id
 
   attributes :completed, :challenge_id
+
+  attribute :name do |object|
+    object.participation.name if object.completed
+  end
 end

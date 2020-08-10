@@ -6,7 +6,7 @@ module Api
       def show
         challenge = Challenge.find_by(id: params[:id])
         options = {
-          include: [:challenge_conditions]
+          include: [:challenge_conditions, :challenge_completions]
         }
 
         render json: ChallengeSerializer.new(presenter_challenge(challenge, current_api_v1_user),

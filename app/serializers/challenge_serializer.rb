@@ -7,7 +7,7 @@ class ChallengeSerializer
   set_id :id
 
   has_many :challenge_conditions
-  has_many :challenge_completion
+  has_many :challenge_completions
 
   attributes :title, :description, :open, :points, :completed, :locations
 
