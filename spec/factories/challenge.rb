@@ -10,5 +10,9 @@ FactoryBot.define do
     trait :hidden do
       open { false }
     end
+
+    trait :locations do
+      locations { [{ 'lat': '50.0', lon: '20.0' }, { 'lat': '50.1', lon: '20.1' }] }
+    end
   end
 end

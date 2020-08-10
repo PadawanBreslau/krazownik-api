@@ -10,6 +10,12 @@ describe Api::V1::ChallengesController do
       body = JSON.parse(response.body)['data']
       expect(body['attributes']['title']).to eq 'Spisz?'
     end
+
+    it 'return locations' do
+      challenge = create(:challenge, :locations, title: 'Spisz?')
+      expect(challenge.locations.size).to eq 2
+      expect(challenge.locations.first.keys).to eq %w(lat lon)
+    end
   end
 
   describe 'index' do

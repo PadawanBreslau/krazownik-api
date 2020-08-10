@@ -9,7 +9,7 @@ class ChallengeSerializer
   has_many :challenge_conditions
   has_many :challenge_completion
 
-  attributes :title, :description, :open, :points, :completed
+  attributes :title, :description, :open, :points, :completed, :locations
 
   attribute :icon do |object|
     image_path(object: object, image_field: :icon)

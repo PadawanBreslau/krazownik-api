@@ -3,9 +3,9 @@ class GpxPoint < ApplicationRecord
 
   has_and_belongs_to_many :participations
 
-  def close_enough?(lat, lng)
-    Geokit::LatLng.new(self.lat, self.lng)
-                  .distance_to("#{lat}, #{lng}").round(2) < SAME_POINT_APPROXIMATION_DISTANCE
+  def close_enough?(lat, lon)
+    Geokit::LatLng.new(self.lat, self.lon)
+                  .distance_to("#{lat}, #{lon}").round(2) < SAME_POINT_APPROXIMATION_DISTANCE
   end
 
   def color

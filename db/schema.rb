@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_214117) do
+ActiveRecord::Schema.define(version: 2020_08_10_095243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_214117) do
   create_table "bonus_points", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "lat", precision: 10, scale: 6, null: false
-    t.decimal "lng", precision: 10, scale: 6, null: false
+    t.decimal "lon", precision: 10, scale: 6, null: false
     t.string "region"
     t.integer "points"
     t.bigint "event_id", null: false
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_214117) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "points"
+    t.jsonb "details"
     t.index ["event_id"], name: "index_challenges_on_event_id"
   end
 
@@ -125,7 +126,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_214117) do
 
   create_table "gpx_points", force: :cascade do |t|
     t.float "lat"
-    t.float "lng"
+    t.float "lon"
     t.integer "counter", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

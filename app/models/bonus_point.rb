@@ -22,8 +22,8 @@ class BonusPoint < ApplicationRecord
 
   def too_close?
     BonusPoint.where(event_id: event_id).any? do |bp|
-      Geokit::LatLng.new(lat, lng)
-                    .distance_to("#{bp.lat}, #{bp.lng}") < 1.0
+      Geokit::LatLng.new(lat, lon)
+                    .distance_to("#{bp.lat}, #{bp.lon}") < 1.0
     end
   end
 end
