@@ -25,10 +25,11 @@ module Api
       end
 
       def update
-        user = User.find(id: params[:id])
+        user = User.find(params[:id].to_i)
+        options = { include: [:participations] }
 
         if user.update(user_params)
-          render json: UserSerializer.new(service.user, options).serialized_json, status: :ok
+          render json: UserSerializer.new(user, options).serialized_json, status: :ok
         else
           render_error(status: :unprocessable_entity,
                        title: 'Wrong data',
@@ -65,7 +66,7 @@ module Api
       end
 
       def user_params
-        jsonapi_params.permit(:email, :name, :password, :password_confirmation)
+        jsonapi_params.permit(:email, :name, :phone_number, :send_messages, :send_riddles, :password, :password_confirmation)
       end
     end
   end

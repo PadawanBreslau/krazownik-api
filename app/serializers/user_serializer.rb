@@ -6,7 +6,7 @@ class UserSerializer
   set_id :id
 
   attribute :reset_password_url, if: proc { |record| record.respond_to?(:reset_password_url) }
-  attribute :name, :email, :created_at
+  attribute :name, :email, :phone_number, :send_messages, :send_riddles, :created_at
 
   has_many :participations
 end

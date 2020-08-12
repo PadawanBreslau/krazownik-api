@@ -19,8 +19,8 @@ class SendRecentRiddleService
   end
 
   def send_riddle_to_all_telephones
-    PhoneNumber.where(send_riddles: true).each do |phone|
-      MessageSendingJob.perform_later(phone: phone, content: @riddle.content)
+    User.where(send_riddles: true).select { |u| u.phone_number && u.current_participation&.event&.year == SelectProperYearLogic.year }.each do |user|
+      MessageSendingJob.perform_later(phone: user.phone_number, content: @riddle.content)
     end
   end
 

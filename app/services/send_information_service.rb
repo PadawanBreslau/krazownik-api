@@ -10,8 +10,8 @@ class SendInformationService
   private
 
   def send_content
-    PhoneNumber.where(send_messages: true).each do |phone|
-      MessageSendingJob.perform_later(phone: phone, content: @content)
+    User.where(send_messages: true).select { |u| u.phone_number }.each do |user|
+      MessageSendingJob.perform_later(phone: user.phone_number, content: @content)
     end
   end
 end

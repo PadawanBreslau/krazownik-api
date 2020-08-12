@@ -16,8 +16,8 @@ class SendRecentMessageService
   end
 
   def send_message_to_all_telephones
-    PhoneNumber.where(send_messages: true).each do |phone|
-      MessageSendingJob.perform_later(phone: phone, content: @message.content)
+    User.where(send_messages: true).select { |u| u.phone_number && u.current_participation&.event&.year == SelectProperYearLogic.year }.each do |user|
+      MessageSendingJob.perform_later(phone: user.phone_number, content: @message.content)
     end
   end
 
