@@ -69,7 +69,7 @@ module Api
 
       def user_params
         jsonapi_params.permit(:email, :name, :phone_number, :send_messages, :send_riddles,
-                              :password, :password_confirmation, :privacy_policy_accepted)
+                              :password, :password_confirmation, :privacy_policy_accepted, :team_ready)
       end
     end
   end
