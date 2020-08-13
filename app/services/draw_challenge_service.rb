@@ -27,7 +27,7 @@ class DrawChallengeService
 
     @possible_challenges = Challenge.current(SelectProperYearLogic.year)
                                     .hidden.where.not(id: @current_challenges.map(&:id))
-                                    .select { |c| c.points <= max_points }
+                                    .select { |c| c.points == max_points }
   end
 
   def randomize_challenge
