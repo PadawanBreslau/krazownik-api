@@ -26,6 +26,8 @@ module Api
 
       def update
         user = User.find(params[:id].to_i)
+        #### TODO
+        #### VALIDATE PHONE
         options = { include: [:participations] }
 
         if user.update(user_params)
@@ -66,7 +68,8 @@ module Api
       end
 
       def user_params
-        jsonapi_params.permit(:email, :name, :phone_number, :send_messages, :send_riddles, :password, :password_confirmation)
+        jsonapi_params.permit(:email, :name, :phone_number, :send_messages, :send_riddles,
+                              :password, :password_confirmation, :privacy_policy_accepted)
       end
     end
   end

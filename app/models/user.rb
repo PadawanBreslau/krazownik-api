@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   has_many :participations, dependent: :destroy
 
+  validates :name, presence: true
+
   def current_participation
     participations&.max_by { |p| p.event.year }
   end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SendInformationService do
   it 'sends message to phone that agreed' do
-    user = create(:user, :with_phone)
+    create(:user, :with_phone)
     service = described_class.new(content: 'This is message for you')
 
     expect do
