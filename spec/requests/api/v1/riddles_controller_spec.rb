@@ -40,8 +40,9 @@ describe Api::V1::RiddlesController do
 
   describe 'index' do
     it 'shows riddles' do
-      create(:riddle, title: 'W którą stronę?', visible_from: Time.current)
-      create(:riddle, title: 'Jaki jest wynik?', visible_from: Time.current - 2.hours)
+      event = create(:event, year: SelectProperYearLogic.year, start_time: Time.current + 6.months)
+      create(:riddle, title: 'W którą stronę?', visible_from: Time.current, event: event)
+      create(:riddle, title: 'Jaki jest wynik?', visible_from: Time.current - 2.hours, event: event)
       get '/api/v1/riddles', headers: json_api_headers
       expect(response).to have_http_status :ok
 

@@ -9,7 +9,7 @@ module Api
       end
 
       def index
-        teams = Team.all
+        teams = Team.all.select(&:visible?)
         options = { include: [:participations] }
 
         render json: TeamSerializer.new(teams, options).serialized_json

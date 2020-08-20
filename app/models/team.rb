@@ -11,4 +11,10 @@ class Team < ApplicationRecord
   def photo_ids
     photos.map(&:id)
   end
+
+  def visible?
+    return false unless event.start_time
+
+    event.start_time - Time.current < 11.months && event.start_time > Time.current + 1.month
+  end
 end

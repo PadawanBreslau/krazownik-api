@@ -8,7 +8,7 @@ module Api
       end
 
       def index
-        riddles = Riddle.all.select { |r| r.visible_from - Time.current < 11.months }
+        riddles = Riddle.all.select(&:visible?)
 
         render json: RiddleSerializer.new(riddles).serialized_json
       end
