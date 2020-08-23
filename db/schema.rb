@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_112914) do
+ActiveRecord::Schema.define(version: 2020_08_22_062437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,6 +176,14 @@ ActiveRecord::Schema.define(version: 2020_08_13_112914) do
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
+    t.datetime "creation_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "results", force: :cascade do |t|
     t.bigint "participation_id", null: false
     t.jsonb "result"
@@ -204,6 +212,14 @@ ActiveRecord::Schema.define(version: 2020_08_13_112914) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "event_id"
     t.index ["event_id"], name: "index_teams_on_event_id"
+  end
+
+  create_table "track_files", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
+    t.jsonb "metadata"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

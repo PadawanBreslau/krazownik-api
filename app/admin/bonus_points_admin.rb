@@ -1,6 +1,6 @@
 Trestle.resource(:bonus_points) do
   scope :all
-  scope :following, dafault: true
+  scope :following, default: true
 
   menu do
     item :bonus_points, icon: 'fa fa-exclamation'
@@ -10,13 +10,13 @@ Trestle.resource(:bonus_points) do
     [:image]
   end
 
-  form do |_bonus_point|
+  form do
     text_field :name
     text_field :region
     text_field :points
     text_field :lat
     text_field :lon
-    select :event_id, Event.all.map(&:id), label: 'Event'
+    select :event_id, Event.all.map(&:year), label: 'Event'
 
     active_storage_field :image
   end

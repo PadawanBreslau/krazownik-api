@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_one_attached :avatar
   belongs_to :team, optional: true
+  has_many :photos, dependent: :nullify
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -18,5 +19,9 @@ class User < ActiveRecord::Base
 
   def current_participation
     participations&.max_by { |p| p.event.year }
+  end
+
+  def unique_name
+    name.split(' ').join('_').downcase.gsub('.', '') + id.to_s
   end
 end

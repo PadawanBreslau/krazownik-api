@@ -31,8 +31,13 @@ Rails.application.routes.draw do
       resources :riddles, only: [:show, :index]
       resources :results, only: [:index]
       resources :teams, only: [:show, :index]
-      resources :photos, only: [:index]
+      resources :photos, only: [:index, :show]
       resources :files, only: [:index] do
+        collection do
+          post :upload
+        end
+      end
+      resources :tracks, only: [:index] do
         collection do
           post :upload
         end

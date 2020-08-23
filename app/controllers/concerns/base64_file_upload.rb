@@ -4,12 +4,15 @@ module Base64FileUpload
   protected
 
   def update_file(object, file_params, file)
+    @user = object.user
     filename = save_file_on_server(file_params)
     file_full_path = "#{Rails.root}/tmp/#{filename}"
-    save_track(object, file_full_path) if gpx?(filename)
 
-    #   object.send(file).purge # Delete previous one
-    object.send(file).attach(
+    if gpx?(filename)
+      save_track(object, file_full_path)
+      @track_file = TrackFile.new(user: object, event: Event.last)
+    end
+    object_to_attach.send(file).attach(
       io: File.open(file_full_path),
       filename: filename
     )
@@ -27,12 +30,16 @@ module Base64FileUpload
     File.extname(filename).strip.downcase[1..-1] == 'gpx'
   end
 
+  def object_to_attach
+    gpx?(filename) ? @track_file : @user
+  end
+
   def save_track(object, path)
     read_file = ReadGpx.new(file: path)
     read_file.read
 
     read_file.tracks.each do |track|
-      SaveTrackService.new(participation: object, track: Track.new(track: track)).call
+      SaveTrackService.new(participation: object, track: Track.new(track: track))
     end
   end
 

@@ -16,6 +16,7 @@ class Participation < ApplicationRecord
 
   validates :user, uniqueness: { scope: :event, message: 'Already participating' }
   delegate :name, to: :user
+  delegate :year, to: :event
 
   after_commit :create_or_update_results
 

@@ -1,6 +1,6 @@
 Trestle.resource(:challenges) do
   scope :all
-  scope :following, dafault: true
+  scope :following, default: true
 
   menu do
     item :challenges, icon: 'fa fa-exclamation'
