@@ -23,4 +23,14 @@ module JsonApiResponses
 
     render json: response, status: status
   end
+
+  def render_validation_errors(errors)
+    if errors.is_a? ActiveModel::Errors
+      render json: ErrorSerializer.serialize(errors), status: :unprocessable_entity
+    else
+      render_error title: 'Validation error',
+        detail: Array.wrap(errors).join(', '),
+                   status: :unprocessable_entity
+    end
+  end
 end

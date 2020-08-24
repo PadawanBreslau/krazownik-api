@@ -9,52 +9,29 @@ module Base64FileUpload
     file_full_path = "#{Rails.root}/tmp/#{filename}"
 
     if gpx?(filename)
-      save_track(object, file_full_path)
-      @track_file = TrackFile.new(user: object, event: Event.last)
+      @track_file = TrackFile.new(user: @user, event: Event.last)
+      @track_file.send(file).attach(
+        io: File.open(file_full_path),
+        filename: filename
+      )
+      @track_file.save!
     end
-    object_to_attach.send(file).attach(
-      io: File.open(file_full_path),
-      filename: filename
-    )
+
+    # TODO
+    # ReadGpxPointsService.new(participation_id: object.id, track_file_id: @track_file.id, filepath: file_full_path)
   ensure
     FileUtils.rm(file_full_path)
   end
 
-  MIME_TYPE_PREFIX = %r{(image|application)\/}.freeze
-  VALID_FORMAT_REGEXP = /#{MIME_TYPE_PREFIX}[a-z]{3,}/.freeze
-  def valid_format?(format)
-    format.nil? || format.match?(VALID_FORMAT_REGEXP)
-  end
+  private
 
   def gpx?(filename)
     File.extname(filename).strip.downcase[1..-1] == 'gpx'
   end
 
-  def object_to_attach
-    gpx?(filename) ? @track_file : @user
-  end
-
-  def save_track(object, path)
-    read_file = ReadGpx.new(file: path)
-    read_file.read
-
-    read_file.tracks.each do |track|
-      SaveTrackService.new(participation: object, track: Track.new(track: track))
-    end
-  end
-
-  # data removal of e.g. "data:application/pdf;base64,"
-  DATA_MIME_TYPE_REMOVAL_REGEXP = /data:#{MIME_TYPE_PREFIX}.{3,},/.freeze
-  EXTRACT_EXTENSION_REGEXP = %r{\b(?!.*\/).*}.freeze
   def save_file_on_server(file_params)
-    content_type = file_params[:content_type][EXTRACT_EXTENSION_REGEXP]
-    filename = file_params[:filename] || 'file_' + Time.current.to_i + '.' + content_type
-    contents = file_params[:data].sub(DATA_MIME_TYPE_REMOVAL_REGEXP, '')
-
-    decoded_data = Base64.decode64(contents)
-    File.open("#{Rails.root}/tmp/#{filename}", 'wb') do |f|
-      f.write(decoded_data)
-    end
-    filename
+    service = SaveFilesOnServerService.new(file_params: file_params)
+    service.call
+    service.filename
   end
 end

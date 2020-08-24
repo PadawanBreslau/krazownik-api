@@ -22,6 +22,9 @@ class UploadFileService
     end
 
     true
+  rescue ActiveRecord::RecordInvalid => e
+    @errors = e.message
+    false
   end
 
   private
@@ -41,6 +44,6 @@ class UploadFileService
   end
 
   def upload_track
-    update_file(@participation, @params['file'], :tracks)
+    update_file(@participation, @params['file'], :track)
   end
 end

@@ -7,7 +7,7 @@ class Participation < ApplicationRecord
   has_many :bonus_point_completions, dependent: :destroy
   has_many :bonus_points, through: :event
   has_many :gpx_tracks, dependent: :destroy
-  has_and_belongs_to_many :gpx_points, dependent: :destroy
+  has_and_belongs_to_many :gpx_points
   has_one :extra, dependent: :destroy
   has_one :result, dependent: :destroy
 

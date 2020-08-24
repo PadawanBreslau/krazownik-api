@@ -37,7 +37,7 @@ Rails.application.routes.draw do
           post :upload
         end
       end
-      resources :tracks, only: [:index] do
+      resources :tracks, only: [:index, :show] do
         collection do
           post :upload
         end

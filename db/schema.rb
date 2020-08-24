@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_22_062437) do
+ActiveRecord::Schema.define(version: 2020_08_24_125406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,15 @@ ActiveRecord::Schema.define(version: 2020_08_22_062437) do
     t.index ["participation_id"], name: "index_gpx_points_participations_on_participation_id"
   end
 
+  create_table "gpx_points_track_files", force: :cascade do |t|
+    t.bigint "track_file_id", null: false
+    t.bigint "gpx_point_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gpx_point_id"], name: "index_gpx_points_track_files_on_gpx_point_id"
+    t.index ["track_file_id"], name: "index_gpx_points_track_files_on_track_file_id"
+  end
+
   create_table "gpx_tracks", force: :cascade do |t|
     t.bigint "participation_id", null: false
     t.float "total_ascent"
@@ -258,6 +267,8 @@ ActiveRecord::Schema.define(version: 2020_08_22_062437) do
   add_foreign_key "extras", "participations"
   add_foreign_key "gpx_points_participations", "gpx_points"
   add_foreign_key "gpx_points_participations", "participations"
+  add_foreign_key "gpx_points_track_files", "gpx_points"
+  add_foreign_key "gpx_points_track_files", "track_files"
   add_foreign_key "gpx_tracks", "participations"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"

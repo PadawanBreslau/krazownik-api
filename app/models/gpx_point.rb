@@ -2,6 +2,7 @@ class GpxPoint < ApplicationRecord
   SAME_POINT_APPROXIMATION_DISTANCE = 0.25
 
   has_and_belongs_to_many :participations
+  has_and_belongs_to_many :track_files
 
   def close_enough?(lat, lon)
     Geokit::LatLng.new(self.lat, self.lon)
