@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   extend Devise::Models
 
   has_one_attached :avatar
-  belongs_to :team, optional: true
   has_many :photos, dependent: :nullify
+  has_many :track_files, dependent: :nullify
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

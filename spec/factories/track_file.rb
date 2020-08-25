@@ -3,6 +3,8 @@ FactoryBot.define do
     user
     event
     metadata { {} }
-    track { Rack::Test::UploadedFile.new('spec/factories/track.gpx', 'xml/gpx') }
+    sequence(:track) do |n|
+      Rack::Test::UploadedFile.new("spec/factories/tracks/track#{n}.gpx", 'xml/gpx')
+    end
   end
 end

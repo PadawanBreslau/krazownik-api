@@ -20,5 +20,9 @@ class Event < ApplicationRecord
     participations.map(&:photos).flatten
   end
 
+  def started?
+    start_time && start_time < Time.current
+  end
+
   alias_attribute :to_s, :year
 end

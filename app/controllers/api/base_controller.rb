@@ -17,7 +17,7 @@ module Api
         prev_page: collection.prev_page,
         total_pages: collection.total_pages,
         total_count: collection.total_count,
-        page_size: collection.per_page
+        page_size: collection.limit_value
       }
     end
 

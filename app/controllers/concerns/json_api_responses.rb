@@ -29,7 +29,7 @@ module JsonApiResponses
       render json: ErrorSerializer.serialize(errors), status: :unprocessable_entity
     else
       render_error title: 'Validation error',
-        detail: Array.wrap(errors).join(', '),
+                   detail: Array.wrap(errors).join(', '),
                    status: :unprocessable_entity
     end
   end
