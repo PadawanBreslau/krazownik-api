@@ -49,7 +49,7 @@ describe Api::V1::TracksController do
         file: {
           "filename": 'test.gpx',
           "content_type": 'application/gpx+xml',
-          "data": ''
+          "data": File.read('spec/factories/tracks/b64/file.b64')
         }
       } } }.to_json
       post '/api/v1/tracks/upload', headers: auth_headers(user), params: params
@@ -64,7 +64,7 @@ describe Api::V1::TracksController do
         file: {
           "filename": 'test.gpx',
           "content_type": 'application/gpx+xml',
-          "data": ''
+          "data": File.read('spec/factories/tracks/b64/file.b64')
         }
       } } }.to_json
       post '/api/v1/tracks/upload', headers: auth_headers(user), params: params

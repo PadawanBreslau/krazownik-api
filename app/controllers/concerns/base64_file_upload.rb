@@ -17,8 +17,7 @@ module Base64FileUpload
       @track_file.save!
     end
 
-    # TODO
-    # ReadGpxPointsService.new(participation_id: object.id, track_file_id: @track_file.id, filepath: file_full_path)
+    ReadGpxPointsService.new(participation_id: object.id, track_file_id: @track_file.id, filepath: file_full_path).call
   ensure
     FileUtils.rm(file_full_path)
   end

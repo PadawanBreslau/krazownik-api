@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_26_134702) do
+ActiveRecord::Schema.define(version: 2020_08_27_111501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,8 @@ ActiveRecord::Schema.define(version: 2020_08_26_134702) do
     t.integer "counter", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "unified", default: true
+    t.integer "track_index"
   end
 
   create_table "gpx_points_participations", force: :cascade do |t|
@@ -229,6 +231,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_134702) do
     t.jsonb "metadata", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "custom_name"
   end
 
   create_table "users", force: :cascade do |t|

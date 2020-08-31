@@ -6,7 +6,8 @@ class Event < ApplicationRecord
 
   validates :start_time, presence: true
 
-  store :informations, accessors: [:date, :place, :base_location, :lat, :lon, :url, :regulations_url, :fb_event_url]
+  store :informations, accessors: [:date, :place, :base_location, :lat, :lon, :url,
+                                   :regulations_url, :fb_event_url, :accomodation_lat, :accomodation_lon]
 
   def self.recent
     where('? >  start_time', Time.current.to_date).order('start_time DESC').first

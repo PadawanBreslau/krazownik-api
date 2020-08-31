@@ -41,6 +41,10 @@ Rails.application.routes.draw do
         collection do
           post :upload
         end
+
+        member do
+          get :all
+        end
       end
       resources :bonus_points, only: [:show, :index] do
         member do
