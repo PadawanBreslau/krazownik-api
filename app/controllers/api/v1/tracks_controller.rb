@@ -1,7 +1,7 @@
 module Api
   module V1
     class TracksController < Api::BaseController
-      before_action :authenticate_api_v1_user!, only: [:show, :index, :upload, :all]
+      before_action :authenticate_api_v1_user!, only: [:show, :index, :update, :destroy, :upload, :all]
 
       def show
         track = TrackFile.find(params[:id])
@@ -20,6 +20,19 @@ module Api
 
         render json: TrackFileSerializer.new(tracks, options).serialized_json
       end
+
+      def update
+        track = TrackFile.find(params[:id])
+        service = UpdateTrackService.new(track: track, params: track_params)
+        if service.call
+          options = { include: [:gpx_points] }
+          render json: TrackFileSerializer.new(track, options).serialized_json, status: :ok
+        else
+          render_validation_errors(service.errors)
+        end
+      end
+
+      def destroy; end
 
       def all
         year = params[:id].to_i
@@ -43,6 +56,10 @@ module Api
 
       def upload_file_params
         jsonapi_params.permit(file: {})
+      end
+
+      def track_params
+        jsonapi_params.permit([:multiplier, :name])
       end
     end
   end

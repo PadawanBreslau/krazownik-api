@@ -40,6 +40,26 @@ describe Api::V1::TracksController do
     end
   end
 
+  describe 'update' do
+    it 'shows file' do
+      user = create(:user)
+      event = create(:event)
+
+      track = create(:track_file, user: user, event: event)
+      FactoryBot.rewind_sequences
+      get "/api/v1/tracks/#{track.id}", headers: auth_headers(user)
+      expect(response).to have_http_status :ok
+
+      params = { data:
+                 { attributes: {
+                   "multiplier": '1.5'
+                 } } }.to_json
+      put "/api/v1/tracks/#{track.id}", headers: auth_headers(user), params: params
+      expect(response).to have_http_status :ok
+      expect(track.reload.multiplier).to eq 1.5
+    end
+  end
+
   describe 'upload' do
     it 'uploads the file' do
       user = create(:user)
