@@ -41,7 +41,7 @@ describe Api::V1::TracksController do
   end
 
   describe 'update' do
-    it 'shows file' do
+    it 'update file' do
       user = create(:user)
       event = create(:event)
 
@@ -52,11 +52,28 @@ describe Api::V1::TracksController do
 
       params = { data:
                  { attributes: {
-                   "multiplier": '1.5'
+                   "multiplier": '1.5',
+                   "custom_name": 'Kręcenie się'
                  } } }.to_json
       put "/api/v1/tracks/#{track.id}", headers: auth_headers(user), params: params
       expect(response).to have_http_status :ok
       expect(track.reload.multiplier).to eq 1.5
+      expect(track.reload.custom_name).to eq 'Kręcenie się'
+    end
+  end
+
+  describe 'destroy' do
+    it 'destroys file' do
+      user = create(:user)
+      event = create(:event)
+
+      track = create(:track_file, user: user, event: event)
+      FactoryBot.rewind_sequences
+
+      expect do
+        delete "/api/v1/tracks/#{track.id}", headers: auth_headers(user)
+        expect(response).to have_http_status :ok
+      end.to change(TrackFile, :count).by(-1).and change(ActiveStorage::Attachment, :count).by(-1)
     end
   end
 

@@ -32,7 +32,13 @@ module Api
         end
       end
 
-      def destroy; end
+      def destroy
+        track = TrackFile.find(params[:id])
+        track.track.purge
+        track.destroy
+
+        render_success
+      end
 
       def all
         year = params[:id].to_i
@@ -59,7 +65,7 @@ module Api
       end
 
       def track_params
-        jsonapi_params.permit([:multiplier, :name])
+        jsonapi_params.permit([:multiplier, :custom_name])
       end
     end
   end
