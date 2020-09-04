@@ -3,26 +3,39 @@ module Base64FileUpload
 
   protected
 
-  def update_file(object, file_params, file)
-    @user = object.user
-    filename = save_file_on_server(file_params)
-    file_full_path = "#{Rails.root}/tmp/#{filename}"
+  attr_reader :file_full_path
 
-    if gpx?(filename)
+  def update_file(object, file_params, file)
+    @user = object.is_a?(User) ? object : object.user
+    @filename = save_file_on_server(file_params)
+    @file_full_path = "#{Rails.root}/tmp/#{@filename}"
+
+    if gpx?(@filename)
       @track_file = TrackFile.new(user: @user, event: Event.last)
-      @track_file.send(file).attach(
-        io: File.open(file_full_path),
-        filename: filename
-      )
+      attach(@track_file, file)
       @track_file.save!
+      ReadGpxPointsService.new(participation_id: object.id,
+                               track_file_id: @track_file.id,
+                               filepath: @file_full_path).call
     end
 
-    ReadGpxPointsService.new(participation_id: object.id, track_file_id: @track_file.id, filepath: file_full_path).call
+    attach(object, file) if image?(@filename)
   ensure
     FileUtils.rm(file_full_path)
   end
 
   private
+
+  def attach(object, file)
+    object.send(file).attach(
+      io: File.open(@file_full_path),
+      filename: @filename
+    )
+  end
+
+  def image?(filename)
+    File.extname(filename).strip.downcase[1..-1].in? %w(png jpeg jpg)
+  end
 
   def gpx?(filename)
     File.extname(filename).strip.downcase[1..-1] == 'gpx'

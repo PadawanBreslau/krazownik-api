@@ -3,6 +3,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def avatar?
+    record == user
+  end
+
   def reset_password?
     true
   end

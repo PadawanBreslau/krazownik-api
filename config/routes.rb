@@ -16,7 +16,11 @@ Rails.application.routes.draw do
 
       get 'panel' => 'users#panel'
 
-      resources :users, only: [:update]
+      resources :users, only: [:update] do
+        member do
+          post :avatar
+        end
+      end
       resources :events, only: [:index]
       resources :notes, only: [:index]
       resources :challenges, only: [:show, :index] do

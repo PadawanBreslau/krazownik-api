@@ -39,6 +39,19 @@ module Api
         end
       end
 
+      def avatar
+        user = User.find(params[:id].to_i)
+        authorize user
+
+        service = UploadAvatarService.new(user: user, params: upload_file_params)
+        if service.call
+          attachments = current_api_v1_user.current_participation&.tracks
+          render json: FileSerializer.new(attachments).serialized_json, status: :ok
+        else
+          render_validation_errors(service.errors)
+        end
+      end
+
       def reset_password
         authorize User
         user = User.find_by(email: jsonapi_params[:email]&.downcase)
@@ -70,6 +83,10 @@ module Api
       def user_params
         jsonapi_params.permit(:email, :name, :phone_number, :send_messages, :send_riddles,
                               :password, :password_confirmation, :privacy_policy_accepted, :team_ready)
+      end
+
+      def upload_file_params
+        jsonapi_params.permit(file: {})
       end
     end
   end

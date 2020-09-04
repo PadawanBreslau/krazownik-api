@@ -4,7 +4,7 @@ class TrackFileSerializer
 
   has_many :gpx_points
 
-  attributes :multiplier, :metadata, :created_at, :user_id, :event_id, :year, :custom_name
+  attributes :multiplier, :metadata, :created_at, :user_id, :event_id, :year, :custom_name, :points
 
   attribute :filename, &:filename
 

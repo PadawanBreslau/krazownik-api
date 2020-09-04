@@ -25,6 +25,21 @@ class TrackFile < ApplicationRecord
     errors.add(:track, 'already present') if track_present?
   end
 
+  def points
+    return 0.0 if distance.nil? && ascent.nil?
+
+    (points_from_distance + points_from_ascent) * multiplier
+  end
+
+  def points_from_distance
+    distance.floor
+  end
+
+  ASCENT_MULTIPLIER = 1.5
+  def points_from_ascent
+    (ascent / 100) * ASCENT_MULTIPLIER
+  end
+
   def track_present?
     TrackFile.find do |tr|
       tr.byte_size == byte_size &&
