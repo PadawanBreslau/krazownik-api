@@ -81,7 +81,7 @@ module Api
       end
 
       def user_params
-        jsonapi_params.permit(:email, :name, :phone_number, :send_messages, :send_riddles,
+        jsonapi_params.permit(:email, :name, :phone_number, :send_messages, :send_riddles, :about_me,
                               :password, :password_confirmation, :privacy_policy_accepted, :team_ready)
       end
 
