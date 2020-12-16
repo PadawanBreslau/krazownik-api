@@ -1,9 +1,13 @@
 class BonusPointPolicy < ApplicationPolicy
-  def toggle_completion?
+  def show?
+    true
+  end
+
+  def index?
     true
   end
 
   def toggle?
-    true
+    user.current_participation.event == record.event
   end
 end

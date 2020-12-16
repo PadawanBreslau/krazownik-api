@@ -41,7 +41,8 @@ module Api
       end
 
       def toggle
-        authorize Challenge
+        challenge = Challenge.find(params[:id])
+        authorize challenge
 
         service = ToggleChallengeService.new(user: current_api_v1_user, challenge_id: params[:id].to_i)
 

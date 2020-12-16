@@ -2,6 +2,7 @@ module Api
   module V1
     class BonusPointsController < Api::BaseController
       def show
+        authorize BonusPoint
         bonus_point = BonusPoint.find_by(id: params[:id])
         bonus_point_formatted = BonusPointPresenter.new(bonus_point, user_context: current_api_v1_user)
         options = { include: [:bonus_point_completions, :participations] }
@@ -10,6 +11,7 @@ module Api
       end
 
       def index
+        authorize BonusPoint
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
 
@@ -21,7 +23,8 @@ module Api
       end
 
       def toggle
-        authorize BonusPoint
+        bonus_point = BonusPoint.find(params[:id])
+        authorize bonus_point
 
         service = ToggleBonusPointService.new(user: current_api_v1_user, bonus_point_id: params[:id].to_i)
 

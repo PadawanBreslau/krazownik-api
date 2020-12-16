@@ -1,13 +1,9 @@
 class ChallengePolicy < ApplicationPolicy
   def draw?
-    true
-  end
-
-  def toggle_completion?
-    true
+    user.present?
   end
 
   def toggle?
-    true
+    user.current_participation.event == record.event
   end
 end
