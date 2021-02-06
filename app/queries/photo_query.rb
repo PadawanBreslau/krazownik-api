@@ -1,5 +1,5 @@
-class TrackQuery
-  def initialize(initial_scope: Track.all, query:, order:, page:)
+class PhotoQuery
+  def initialize(initial_scope: Photo.all, query:, order:, page:)
     @initial_scope = initial_scope
     @query = query
     @order = order
@@ -13,7 +13,7 @@ class TrackQuery
 
   private
 
-  DEFAULT_SORT = 'track_files.created_at DESC'.freeze
+  DEFAULT_SORT = 'photos.created_at DESC'.freeze
 
   def order
     @order ? data_ordering : DEFAULT_SORT

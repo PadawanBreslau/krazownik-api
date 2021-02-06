@@ -14,7 +14,7 @@ module Base64FileUpload
       @track_file = TrackFile.new(user: @user, event: Event.last)
       attach(@track_file, file)
       @track_file.save!
-      ReadGpxPointsService.new(participation_id: object.id,
+      ReadGpxPointsService.new(participation_id: @user.id,
                                track_file_id: @track_file.id,
                                filepath: @file_full_path).call
     end

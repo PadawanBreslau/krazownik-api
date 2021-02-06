@@ -10,7 +10,7 @@ describe Api::V1::PhotosController do
       expect(response).to have_http_status :ok
 
       body = JSON.parse(response.body)['data']
-      expect(body.dig('attributes', 'photo_image')).to be_present
+      expect(body.dig('attributes', 'large_image')).to be_present
     end
   end
 
