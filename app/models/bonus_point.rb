@@ -6,7 +6,7 @@ class BonusPoint < ApplicationRecord
 
   has_one_attached :image
 
-  validate :point_already_near
+  validate :point_already_near, on: :create
 
   scope :following, -> { where(event_id: Event.following.id) }
 
