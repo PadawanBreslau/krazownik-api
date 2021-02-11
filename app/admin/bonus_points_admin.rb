@@ -17,6 +17,6 @@ Trestle.resource(:bonus_points) do
     text_field :lat
     text_field :lon
     select :event_id, Event.all.map { |e| [e.year, e.id] }, label: 'Event'
- #   active_storage_field :image
+    #   active_storage_field :image
   end
 end
