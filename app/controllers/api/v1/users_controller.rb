@@ -82,7 +82,7 @@ module Api
 
       def user_params
         jsonapi_params.permit(:email, :name, :birthyear, :phone_number, :send_messages, :send_riddles, :about_me,
-                              :password, :password_confirmation, :privacy_policy_accepted, :team_ready)
+                              :password, :password_confirmation, :privacy_policy_accepted, :team_ready, :viewable)
       end
 
       def upload_file_params

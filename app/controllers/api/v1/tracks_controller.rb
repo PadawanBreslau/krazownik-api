@@ -1,7 +1,7 @@
 module Api
   module V1
     class TracksController < Api::BaseController
-      before_action :authenticate_api_v1_user!, only: [:show, :index, :update, :destroy, :upload, :all]
+      before_action :authenticate_api_v1_user!, only: [:show, :index, :update, :destroy, :upload, :all, :index_all]
 
       def show
         track = TrackFile.find(params[:id])
@@ -49,10 +49,24 @@ module Api
       end
 
       def all
+        autrorize Track
+
         year = params[:id].to_i
         event = Event.find_by(year: year)
 
         tracks = current_api_v1_user.track_files.where(event_id: event.id)
+        options = { include: [:gpx_points] }
+
+        render json: TrackFileSerializer.new(tracks, options).serialized_json
+      end
+
+      def index_all
+        autrorize Track
+
+        year = params[:id].to_i
+        event = Event.find_by(year: year)
+
+        tracks = TrackFile.where(event_id: event.id)
         options = { include: [:gpx_points] }
 
         render json: TrackFileSerializer.new(tracks, options).serialized_json
