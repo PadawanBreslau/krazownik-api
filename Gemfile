@@ -31,6 +31,7 @@ gem 'trestle-active_storage'
 gem 'trestle-auth'
 
 group :development, :test do
+  gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'pry-byebug'

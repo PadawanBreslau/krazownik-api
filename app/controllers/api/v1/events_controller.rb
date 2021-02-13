@@ -2,6 +2,8 @@ module Api
   module V1
     class EventsController < Api::BaseController
       def index
+        authorize Event
+
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
 

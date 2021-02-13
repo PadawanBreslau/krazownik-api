@@ -1,0 +1,2 @@
+class RiddlePolicy < ApplicationPolicy
+end

@@ -2,6 +2,8 @@ module Api
   module V1
     class GpxPointsController < Api::BaseController
       def index
+        authorize GpxPoint
+
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
 

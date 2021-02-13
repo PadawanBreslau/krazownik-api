@@ -8,9 +8,9 @@ module Api
 
       def index
         @photos = if params[:user_id]
-                    User.find(params[:user_id]).photos.map(&:photo_image)
+                    User.find(params[:user_id]).photos.includes([:blob]).map(&:photo_image)
                   else
-                    ActiveStorage::Attachment.where(name: 'photo_image').take(10).shuffle
+                    ActiveStorage::Attachment.where(name: 'photo_image').includes([:blob]).take(10).shuffle
                   end
         render json: ImageSerializer.new(@photos).serialized_json
       end

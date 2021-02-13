@@ -7,7 +7,7 @@ class TrackQuery
   end
 
   def call
-    collection = @initial_scope
+    collection = @initial_scope.includes([:event, :gpx_points_trackfiles, :gpx_points, track_attachment: :blob])
     collection.order(order, created_at: :desc).page(@page)
   end
 

@@ -2,8 +2,9 @@ module Api
   module V1
     class BonusPointsController < Api::BaseController
       def show
-        authorize BonusPoint
         bonus_point = BonusPoint.find_by(id: params[:id])
+        authorize bonus_point
+
         bonus_point_formatted = BonusPointPresenter.new(bonus_point, user_context: current_api_v1_user)
         options = { include: [:bonus_point_completions, :participations] }
 
@@ -12,10 +13,11 @@ module Api
 
       def index
         authorize BonusPoint
+
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
 
-        formatted_bonus_points = event.bonus_points.map do |bp|
+        formatted_bonus_points = event.bonus_points&.includes([:image_attachment])&.map do |bp|
           BonusPointPresenter.new(bp, user_context: current_api_v1_user)
         end
 

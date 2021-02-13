@@ -27,6 +27,7 @@ class DrawChallengeService
 
     @possible_challenges = Challenge.current(SelectProperYearLogic.year)
                                     .hidden.where.not(id: @current_challenges.map(&:id))
+                                    .includes([icon_attachment: :blob])
                                     .select { |c| c.points == max_points }
   end
 

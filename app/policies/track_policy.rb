@@ -1,0 +1,2 @@
+class TrackPolicy < ApplicationPolicy
+end

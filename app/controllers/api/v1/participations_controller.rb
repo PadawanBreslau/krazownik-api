@@ -3,6 +3,7 @@ module Api
     class ParticipationsController < Api::BaseController
       def show
         participation = Participation.find_by(id: params[:id])
+        authorize participation
 
         if participation.user == current_api_v1_user
           options = { include: [:gpx_points, :extra, :teams,
@@ -12,11 +13,14 @@ module Api
       end
 
       def index
+        authorize Participation
         participations = current_api_v1_user.participations
+                                            .includes([:event, :gpx_tracks, :extra])
         render json: ParticipationSerializer.new(participations).serialized_json
       end
 
       def create
+        authorize Participation
         participation_service = CreateParticipationService.new(user: current_api_v1_user)
 
         if participation_service.call

@@ -5,11 +5,15 @@ module Api
 
       def show
         track = TrackFile.find(params[:id])
+        authorize track
+
         options = { include: [:gpx_points] }
         render json: TrackFileSerializer.new(track, options).serialized_json, status: :ok
       end
 
       def index
+        authorize Track
+
         service = TracksService.new(user: current_api_v1_user, params: params)
         service.call
 
@@ -23,6 +27,8 @@ module Api
 
       def update
         track = TrackFile.find(params[:id])
+        authorize track
+
         service = UpdateTrackService.new(track: track, params: track_params)
         if service.call
           options = { include: [:gpx_points] }
@@ -34,6 +40,8 @@ module Api
 
       def destroy
         track = TrackFile.find(params[:id])
+        authorize track
+
         track.track.purge
         track.destroy
 

@@ -1,9 +1,11 @@
 module Api
   module V1
     class MediaController < Api::BaseController
-      before_action :authenticate_api_v1_user!, only: [:index]
+      before_action :authenticate_api_v1_user!, only: [:index, :upload]
 
       def index
+        authorize Media
+
         service = PhotoService.new(user: current_api_v1_user, params: params)
         service.call
 
@@ -16,6 +18,8 @@ module Api
       end
 
       def upload
+        authorize Media
+
         service = UploadFileService.new(user: current_api_v1_user, params: upload_file_params)
         if service.call
           attachments = current_api_v1_user.current_participation&.tracks

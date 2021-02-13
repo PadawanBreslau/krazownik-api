@@ -5,6 +5,8 @@ module Api
 
       def show
         challenge = Challenge.find_by(id: params[:id])
+        authorize challenge
+
         options = {
           include: [:challenge_conditions, :challenge_completions]
         }
@@ -14,13 +16,16 @@ module Api
       end
 
       def index
+        authorize Challenge
+
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
         options = {
           include: [:challenge_conditions, :challenge_completions]
         }
 
-        formatted_challenges = event&.challenges&.where(open: true)&.map do |chl|
+        formatted_challenges = event&.challenges&.where(open: true)&.includes(
+          [:challenge_completions, :challenge_conditions, icon_attachment: :blob])&.map do |chl|
           presenter_challenge(chl, current_api_v1_user)
         end
 

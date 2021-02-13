@@ -22,10 +22,11 @@ class Participation < ApplicationRecord
 
   def create_or_update_results
     logic = ResultCalculator.new(participation: self)
-    if logic.call
-      result&.destroy
-      CreateResultService.new(participation: self, result: logic.result, total: logic.total).call
-    end
+
+    return unless logic.call
+
+    result&.destroy
+    CreateResultService.new(participation: self, result: logic.result, total: logic.total).call
   end
 
   def total_distance_points
