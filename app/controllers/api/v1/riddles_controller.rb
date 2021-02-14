@@ -10,7 +10,9 @@ module Api
 
       def index
         authorize Riddle
-        riddles = Riddle.all.select(&:visible?)
+
+        event = Event.last
+        riddles = event.riddles.select(&:visible?)
 
         render json: RiddleSerializer.new(riddles).serialized_json
       end

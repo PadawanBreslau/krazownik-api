@@ -9,6 +9,8 @@ class TrackFile < ApplicationRecord
 
   before_destroy :delete_ununified_gpx_points
 
+  scope :viewable, -> { joins(:user).where('users.viewable = true') }
+
   store :metadata, accessors: [:distance, :ascent, :descent, :total_time, :start_time, :start_date]
 
   class << self

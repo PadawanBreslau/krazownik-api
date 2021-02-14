@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       end
       resources :tracks, only: [:index, :show, :update, :destroy] do
         collection do
+          get :index_all
           post :upload
         end
 

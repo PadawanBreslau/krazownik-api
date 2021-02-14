@@ -49,24 +49,24 @@ module Api
       end
 
       def all
-        autrorize Track
+        authorize Track
 
         year = params[:id].to_i
         event = Event.find_by(year: year)
 
         tracks = current_api_v1_user.track_files.where(event_id: event.id)
+                                    .includes([:gpx_points, track_attachment: :blob])
         options = { include: [:gpx_points] }
 
         render json: TrackFileSerializer.new(tracks, options).serialized_json
       end
 
       def index_all
-        autrorize Track
+        authorize Track
 
-        year = params[:id].to_i
-        event = Event.find_by(year: year)
+        event = Event.last
 
-        tracks = TrackFile.where(event_id: event.id)
+        tracks = TrackFile.viewable.where(event_id: event.id).includes([:gpx_points])
         options = { include: [:gpx_points] }
 
         render json: TrackFileSerializer.new(tracks, options).serialized_json

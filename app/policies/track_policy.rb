@@ -1,10 +1,9 @@
 class TrackPolicy < ApplicationPolicy
-  def all
+  def all?
     true
   end
 
-  def index_all
+  def index_all?
     true
   end
-
 end
