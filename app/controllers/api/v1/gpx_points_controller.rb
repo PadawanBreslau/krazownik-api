@@ -4,10 +4,9 @@ module Api
       def index
         authorize GpxPoint
 
-        year = SelectProperYearLogic.year
-        event = Event.find_by(year: year)
+        event = Event.last #.find_by(year: year)
 
-        gpx_points = event.participations.map(&:gpx_points).flatten.uniq
+        gpx_points = event.track_files.where(event_id: event.id).map(&:gpx_points).flatten.uniq
 
         render json: GpxPointSerializer.new(gpx_points).serialized_json
       end

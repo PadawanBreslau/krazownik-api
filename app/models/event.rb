@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :participations
   has_many :bonus_points
   has_many :riddles
+  has_many :track_files
 
   validates :start_time, presence: true
 
