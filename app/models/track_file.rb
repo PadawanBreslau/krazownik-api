@@ -53,7 +53,9 @@ class TrackFile < ApplicationRecord
   def track_present?
     TrackFile.find do |tr|
       tr.byte_size == byte_size &&
-        tr.filename == filename
+        tr.filename == filename &&
+        tr.user == user &&
+        tr.event == event
     end
   end
 end
