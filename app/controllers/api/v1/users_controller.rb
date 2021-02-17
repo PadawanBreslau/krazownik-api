@@ -4,6 +4,16 @@ module Api
       before_action :authenticate_api_v1_user!, only: [:panel, :update]
       before_action :set_user!, only: [:update_password]
 
+      def show
+        user = User.find(params[:id].to_i)
+        authorize user
+        options = { include: [:participations, :'participations.gpx_points',
+                              :'participations.challenges', :'participations.bonus_points'],
+                    params: { user: user } }
+
+        render json: UserSerializer.new(user, options).serialized_json, status: :ok
+      end
+
       def sign_up
         service = SignUpUserService.new(params: user_params)
 

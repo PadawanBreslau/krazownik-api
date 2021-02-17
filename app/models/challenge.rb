@@ -22,8 +22,11 @@ class Challenge < ApplicationRecord
                 filename: 'question.png', content_type: 'image/png')
   end
 
-  def completed
-    false
+  def completed?(user)
+    participation = event.participations.find_by(user_id: user.id)
+    return false unless participation
+
+    challenge_completions.find_by(participation_id: participation.id)&.completed
   end
 
   def validate_details

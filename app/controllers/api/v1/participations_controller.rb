@@ -19,6 +19,12 @@ module Api
         render json: ParticipationSerializer.new(participations).serialized_json
       end
 
+      def current
+        authorize Participation
+        participation_users = Event.last.participations.map(&:user)
+        render json: UserSerializer.new(participation_users).serialized_json
+      end
+
       def create
         authorize Participation
         participation_service = CreateParticipationService.new(user: current_api_v1_user)

@@ -11,6 +11,10 @@ class ChallengeSerializer
 
   attributes :title, :description, :open, :points, :completed, :locations
 
+  attribute :completed do |object, params|
+    params[:user] ? object.completed?(params[:user]) : false
+  end
+
   attribute :icon do |object|
     image_path(object: object, image_field: :icon)
   end

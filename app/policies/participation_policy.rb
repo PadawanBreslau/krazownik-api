@@ -6,4 +6,8 @@ class ParticipationPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def current?
+    true
+  end
 end

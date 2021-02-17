@@ -1,4 +1,8 @@
 class UserPolicy < ApplicationPolicy
+  def show
+    true
+  end
+
   def sign_up?
     true
   end

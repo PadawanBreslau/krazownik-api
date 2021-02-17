@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
       get 'panel' => 'users#panel'
 
-      resources :users, only: [:update] do
+      resources :users, only: [:show, :update] do
         member do
           post :avatar
         end
@@ -61,7 +61,11 @@ Rails.application.routes.draw do
           post :toggle
         end
       end
-      resources :participations, only: [:show, :index, :create]
+      resources :participations, only: [:show, :index, :create] do
+        collection do
+          get :current
+        end
+      end
       resources :gpx_points, only: [:index]
     end
   end
