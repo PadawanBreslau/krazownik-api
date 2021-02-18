@@ -20,6 +20,8 @@ class Participation < ApplicationRecord
 
   after_commit :create_or_update_results
 
+  scope :current, -> { where(event_id: Event.last.id)}
+
   def create_or_update_results
     logic = ResultCalculator.new(participation: self)
 
