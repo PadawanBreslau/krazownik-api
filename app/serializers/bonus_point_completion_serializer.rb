@@ -17,5 +17,9 @@ class BonusPointCompletionSerializer
     image_path(object: user, image_field: :avatar, resize: '120x120')
   end
 
+  attribute :user_id do |object|
+    object.participation.user.id
+  end
+
   attribute :bonus_point_id, &:bonus_point_id
 end

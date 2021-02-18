@@ -16,4 +16,8 @@ class ChallengeCompletionSerializer
     user = object.participation.user
     image_path(object: user, image_field: :avatar, resize: '120x120')
   end
+
+  attribute :user_id do |object|
+    object.participation.user.id
+  end
 end
