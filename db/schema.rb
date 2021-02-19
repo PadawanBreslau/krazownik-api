@@ -123,14 +123,15 @@ ActiveRecord::Schema.define(version: 2021_02_18_205858) do
   end
 
   create_table "crypto_riddle_solutions", force: :cascade do |t|
-    t.bigint "crypto_riddle_id", null: false
+    t.bigint "crypto_challenge_id", null: false
     t.bigint "crypto_participation_id", null: false
     t.string "answer"
+    t.integer "good_answer_id"
     t.boolean "status", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["crypto_challenge_id"], name: "index_crypto_riddle_solutions_on_crypto_challenge_id"
     t.index ["crypto_participation_id"], name: "index_crypto_riddle_solutions_on_crypto_participation_id"
-    t.index ["crypto_riddle_id"], name: "index_crypto_riddle_solutions_on_crypto_riddle_id"
   end
 
   create_table "crypto_riddles", force: :cascade do |t|
@@ -299,8 +300,8 @@ ActiveRecord::Schema.define(version: 2021_02_18_205858) do
   add_foreign_key "challenges", "events"
   add_foreign_key "crypto_challenges", "events"
   add_foreign_key "crypto_participations", "participations"
+  add_foreign_key "crypto_riddle_solutions", "crypto_challenges"
   add_foreign_key "crypto_riddle_solutions", "crypto_participations"
-  add_foreign_key "crypto_riddle_solutions", "crypto_riddles"
   add_foreign_key "crypto_riddles", "crypto_challenges"
   add_foreign_key "extras", "participations"
   add_foreign_key "gpx_points_participations", "gpx_points"
