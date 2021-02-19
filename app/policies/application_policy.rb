@@ -14,6 +14,10 @@ class ApplicationPolicy
     true
   end
 
+  def create?
+    false
+  end
+
   def edit?
     false
   end

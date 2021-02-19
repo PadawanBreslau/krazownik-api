@@ -67,6 +67,11 @@ Rails.application.routes.draw do
         end
       end
       resources :gpx_points, only: [:index]
+
+      namespace :crypto do
+        resources :participations, only: [:show, :index]
+        resources :riddle_solutions, only: [:index, :create]
+      end
     end
   end
   mount Sidekiq::Web, at: '/sidekiq_monitor'

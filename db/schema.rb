@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_095936) do
+ActiveRecord::Schema.define(version: 2021_02_18_205858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,39 @@ ActiveRecord::Schema.define(version: 2021_02_18_095936) do
     t.integer "points"
     t.jsonb "details"
     t.index ["event_id"], name: "index_challenges_on_event_id"
+  end
+
+  create_table "crypto_challenges", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_crypto_challenges_on_event_id"
+  end
+
+  create_table "crypto_participations", force: :cascade do |t|
+    t.bigint "participation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["participation_id"], name: "index_crypto_participations_on_participation_id"
+  end
+
+  create_table "crypto_riddle_solutions", force: :cascade do |t|
+    t.bigint "crypto_riddle_id", null: false
+    t.bigint "crypto_participation_id", null: false
+    t.string "answer"
+    t.boolean "status", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["crypto_participation_id"], name: "index_crypto_riddle_solutions_on_crypto_participation_id"
+    t.index ["crypto_riddle_id"], name: "index_crypto_riddle_solutions_on_crypto_riddle_id"
+  end
+
+  create_table "crypto_riddles", force: :cascade do |t|
+    t.bigint "crypto_challenge_id", null: false
+    t.string "solution"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["crypto_challenge_id"], name: "index_crypto_riddles_on_crypto_challenge_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -264,6 +297,11 @@ ActiveRecord::Schema.define(version: 2021_02_18_095936) do
   add_foreign_key "bonus_points", "events"
   add_foreign_key "challenge_conditions", "challenges"
   add_foreign_key "challenges", "events"
+  add_foreign_key "crypto_challenges", "events"
+  add_foreign_key "crypto_participations", "participations"
+  add_foreign_key "crypto_riddle_solutions", "crypto_participations"
+  add_foreign_key "crypto_riddle_solutions", "crypto_riddles"
+  add_foreign_key "crypto_riddles", "crypto_challenges"
   add_foreign_key "extras", "participations"
   add_foreign_key "gpx_points_participations", "gpx_points"
   add_foreign_key "gpx_points_participations", "participations"

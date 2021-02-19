@@ -330,6 +330,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    string-similarity (2.1.0)
     telephone_number (1.4.6)
     thor (0.20.3)
     thread_safe (0.3.6)
@@ -402,6 +403,7 @@ DEPENDENCIES
   sidekiq
   simple-trail
   simplecov
+  string-similarity
   telephone_number
   time_difference
   timecop

@@ -7,6 +7,7 @@ class Participation < ApplicationRecord
   has_many :bonus_point_completions, dependent: :destroy
   has_many :bonus_points, through: :event
   has_many :gpx_tracks, dependent: :destroy
+  has_many :crypto_riddle_solutions
   has_and_belongs_to_many :gpx_points
   has_one :extra, dependent: :destroy
   has_one :result, dependent: :destroy
@@ -20,7 +21,7 @@ class Participation < ApplicationRecord
 
   after_commit :create_or_update_results
 
-  scope :current, -> { where(event_id: Event.last.id)}
+  scope :current, -> { where(event_id: Event.last.id) }
 
   def create_or_update_results
     logic = ResultCalculator.new(participation: self)

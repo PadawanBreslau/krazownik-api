@@ -1,0 +1,2 @@
+class CryptoParticipationPolicy < ApplicationPolicy
+end
