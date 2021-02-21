@@ -47,6 +47,10 @@ def json_api_headers
   }
 end
 
+def wrap_json(params)
+  { data: { attributes: params } }.to_json
+end
+
 def basic_auth_headers
   credentials = ActionController::HttpAuthentication::Basic.encode_credentials(
     ENV['PIPEDRIVE_WEBHOOKS_USER'], ENV['PIPEDRIVE_WEBHOOKS_PASSWORD']

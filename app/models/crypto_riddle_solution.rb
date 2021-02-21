@@ -3,6 +3,7 @@ class CryptoRiddleSolution < ApplicationRecord
   belongs_to :crypto_participation, counter_cache: true
 
   validate :too_many_answers
+  validates :answer, presence: true
   after_create :check_answer
 
   def too_many_answers

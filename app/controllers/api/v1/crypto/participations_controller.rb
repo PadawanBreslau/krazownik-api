@@ -2,6 +2,8 @@ module Api
   module V1
     module Crypto
       class ParticipationsController < Api::BaseController
+        before_action :authenticate_api_v1_user!, only: [:show]
+
         def show
           crypto_participation = CryptoParticipation.find_by(id: params[:id])
           authorize crypto_participation
@@ -10,8 +12,6 @@ module Api
         end
 
         def index
-          authorize CryptoParticipation
-
           crypto_participations = Event.last&.crypto_participations
 
           if crypto_participations
