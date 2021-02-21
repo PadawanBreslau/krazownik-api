@@ -12,10 +12,17 @@ module Api
         def index
           authorize CryptoParticipation
 
-          event = Event.last
-          crypto_participations = event.crypto_participations
+          crypto_participations = Event.last&.crypto_participations
 
-          render json: CryptoParticipationSerializer.new(crypto_participations).serialized_json
+          if crypto_participations
+            result = crypto_participations.joins(:crypto_riddle_solutions)
+                                          .where('crypto_riddle_solutions.status is true')
+                                          .group(:id).order('count(crypto_riddle_solutions.id) DESC')
+
+            render json: CryptoParticipationSerializer.new(result, params: { basic: true }).serialized_json
+          else
+            render json: {}
+          end
         end
       end
     end

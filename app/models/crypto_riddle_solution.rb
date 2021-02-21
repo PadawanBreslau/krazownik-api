@@ -1,6 +1,6 @@
 class CryptoRiddleSolution < ApplicationRecord
   belongs_to :crypto_challenge
-  belongs_to :crypto_participation
+  belongs_to :crypto_participation, counter_cache: true
 
   validate :too_many_answers
   after_create :check_answer
