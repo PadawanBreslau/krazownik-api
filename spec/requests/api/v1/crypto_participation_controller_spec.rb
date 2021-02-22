@@ -101,6 +101,26 @@ describe Api::V1::Crypto::ParticipationsController do
       expect(participation['attributes'].keys.include?('bad_solutions')).to be(false)
     end
 
+    it 'shows own detailed results' do
+      user = create(:user)
+      event = create(:event)
+      participation = create(:participation, user: user, event: event)
+      crypto_participation = create(:crypto_participation, participation: participation)
+      crypto_challenge = create(:crypto_challenge, event: event)
+      create(:crypto_riddle, crypto_challenge: crypto_challenge, solution: 'test')
+      create(:crypto_riddle_solution, crypto_participation: crypto_participation,
+                                      crypto_challenge: crypto_challenge, answer: 'test')
+      create(:crypto_riddle_solution, crypto_participation: crypto_participation,
+                                      crypto_challenge: crypto_challenge, answer: 'coś zupełnie innego')
+      get '/api/v1/crypto/participations/', headers: auth_headers(user)
+      expect(response).to have_http_status :ok
+
+      expect((JSON.parse(response.body)['data']).size).to eq 1
+      participation = JSON.parse(response.body)['data'].first
+      expect(participation['attributes']['good_solutions']).to eq ['test']
+      expect(participation['attributes']['bad_solutions']).to eq ['coś zupełnie innego']
+    end
+
     it 'shows people results in proper order' do
       event = create(:event)
       participation = create(:participation, event: event)

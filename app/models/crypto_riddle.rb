@@ -6,6 +6,6 @@ class CryptoRiddle < ApplicationRecord
   has_many :crypto_riddle_solutions
 
   def accepts?(answer)
-    String::Similarity.cosine(answer, solution) > 0.66
+    String::Similarity.cosine(answer, solution) > 0.72
   end
 end

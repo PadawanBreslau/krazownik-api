@@ -6,11 +6,12 @@ module Api
 
         def create
           authorize CryptoRiddleSolution
+          service = CreateCryptoRiddleSolutionService.new(params: crypto_riddle_params, user: current_api_v1_user)
 
-          if CryptoRiddleSolution.new(crypto_riddle_params).save
-            render json: {}
+          if service.call
+            render json: {status: service.status}
           else
-            render_error(status: :unprocessable_entity, title: 'Nie można było zapisać rozwiązania')
+            render_error(status: :unprocessable_entity, title: service.error || 'Nie można było zapisać rozwiązania')
           end
         end
 
