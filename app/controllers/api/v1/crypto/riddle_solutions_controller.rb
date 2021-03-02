@@ -9,9 +9,9 @@ module Api
           service = CreateCryptoRiddleSolutionService.new(params: crypto_riddle_params, user: current_api_v1_user)
 
           if service.call
-            render json: {status: service.status}
+            render json: { status: service.status }
           else
-            render_error(status: :unprocessable_entity, title: service.error || 'Nie można było zapisać rozwiązania')
+            render_error(status: :unprocessable_entity, title: service.errors || 'Nie można było zapisać rozwiązania')
           end
         end
 

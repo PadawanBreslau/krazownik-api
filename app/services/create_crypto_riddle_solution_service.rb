@@ -4,6 +4,7 @@ class CreateCryptoRiddleSolutionService
   def initialize(params:, user:)
     @params = params
     @user = user
+    @errors = []
   end
 
   def call
@@ -11,7 +12,7 @@ class CreateCryptoRiddleSolutionService
     find_or_create_crypto_participation
     save_solution
 
-    @solution.persisted?
+    @solution&.persisted?
   end
 
   private
@@ -22,15 +23,18 @@ class CreateCryptoRiddleSolutionService
 
   def find_or_create_crypto_participation
     participation = @user.participations.last
-    raise 'Zapisz się na zawody' if !participation || participation.event.year != 2021
 
-    @crypto_participation = participation.crypto_participation || CryptoParticipation.create(participation: participation)
+    @crypto_participation = participation.crypto_participation || CryptoParticipation
+                            .create(participation: participation)
   end
 
   def save_solution
-    @solution = CryptoRiddleSolution.new(crypto_participation: @crypto_participation, crypto_challenge: @challenge, answer: @params['answer'])
-    @solution.save
-
-    @status = @solution.reload.status
+    @solution = CryptoRiddleSolution.new(crypto_participation: @crypto_participation,
+                                         crypto_challenge: @challenge, answer: @params['answer'])
+    if @solution.save
+      @status = @solution.reload.status
+    else
+      @errors << 'Unable to save solution'
+    end
   end
 end

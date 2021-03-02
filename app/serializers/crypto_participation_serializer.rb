@@ -14,4 +14,12 @@ class CryptoParticipationSerializer
   attribute :bad_solutions_size do |object|
     object.bad_solutions.size
   end
+
+  attribute :name do |object|
+    object.participation.user.name
+  end
+
+  attribute :avatar do |object|
+    object.participation.user.avatar
+  end
 end

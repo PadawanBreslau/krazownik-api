@@ -4,7 +4,8 @@ describe Api::V1::Crypto::RiddleSolutionsController do
   describe 'create' do
     it 'sends without an answer' do
       user = create(:user)
-      participation = create(:crypto_participation)
+      participation = create(:participation, user: user)
+      participation = create(:crypto_participation, participation: participation)
       challenge = create(:crypto_challenge)
       post '/api/v1/crypto/riddle_solutions', headers: auth_headers(user),
                                               params: wrap_json(crypto_challenge_id: challenge.id,
@@ -14,7 +15,8 @@ describe Api::V1::Crypto::RiddleSolutionsController do
 
     it 'sends an empty answer' do
       user = create(:user)
-      participation = create(:crypto_participation)
+      participation = create(:participation, user: user)
+      participation = create(:crypto_participation, participation: participation)
       challenge = create(:crypto_challenge)
       post '/api/v1/crypto/riddle_solutions', headers: auth_headers(user),
                                               params: wrap_json(crypto_challenge_id: challenge.id,
@@ -25,7 +27,8 @@ describe Api::V1::Crypto::RiddleSolutionsController do
 
     it 'sends a bad answer' do
       user = create(:user)
-      participation = create(:crypto_participation)
+      participation = create(:participation, user: user)
+      participation = create(:crypto_participation, participation: participation)
       challenge = create(:crypto_challenge)
       create(:crypto_riddle, crypto_challenge: challenge, solution: 'Trzy nogi Lenina')
       expect do
@@ -41,7 +44,8 @@ describe Api::V1::Crypto::RiddleSolutionsController do
 
     it 'sends a good answer' do
       user = create(:user)
-      participation = create(:crypto_participation)
+      participation = create(:participation, user: user)
+      participation = create(:crypto_participation, participation: participation)
       challenge = create(:crypto_challenge)
       create(:crypto_riddle, crypto_challenge: challenge, solution: 'Człowiek z liściem na głowie')
       expect do
