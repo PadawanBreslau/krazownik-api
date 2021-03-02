@@ -1,5 +1,6 @@
 Trestle.resource(:challenges) do
   scope :all
+  scope :hidden
   scope :following, default: true
 
   menu do
@@ -25,7 +26,7 @@ Trestle.resource(:challenges) do
 
     row do
       col(sm: 2) { check_box :open }
-      col(sm: 2) { active_storage_field :icon } 
+      col(sm: 2) { active_storage_field :icon }
     end
   end
 end
