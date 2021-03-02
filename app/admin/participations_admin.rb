@@ -3,6 +3,8 @@ Trestle.resource(:participations) do
   scope :current, default: true
 
   menu do
-    item :participations, icon: 'fa fa-star'
+    group :event do
+      item :participations, icon: 'fa fa-star'
+    end
   end
 end

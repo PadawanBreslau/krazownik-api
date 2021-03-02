@@ -3,7 +3,9 @@ Trestle.resource(:challenges) do
   scope :following, default: true
 
   menu do
-    item :challenges, icon: 'fa fa-exclamation'
+    group :challenges do
+      item :challenges, icon: 'fa fa-cubes'
+    end
   end
 
   active_storage_fields do
@@ -11,11 +13,19 @@ Trestle.resource(:challenges) do
   end
 
   form do |_challenge|
-    text_field :title
-    text_area :description
-    text_field :points
-    check_box :open
-    select :event_id, Event.all, label: 'Event'
-    active_storage_field :icon
+    row do
+      col { text_field :title }
+      col { text_field :points }
+      col { select :event_id, Event.all, label: 'Event' }
+    end
+
+    row do
+      col { text_area :description }
+    end
+
+    row do
+      col(sm: 2) { check_box :open }
+      col(sm: 2) { active_storage_field :icon } 
+    end
   end
 end

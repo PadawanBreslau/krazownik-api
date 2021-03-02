@@ -1,6 +1,8 @@
 Trestle.resource(:events) do
   menu do
-    item :events, icon: 'fa fa-star'
+    group :event do
+      item :events, icon: 'fa fa-star'
+    end
   end
 
   form dialog: true do |_event|
