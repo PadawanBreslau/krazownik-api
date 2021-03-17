@@ -16,8 +16,8 @@ module Api
 
           if crypto_participations
             result = crypto_participations.left_joins(:crypto_riddle_solutions)
-              .where('crypto_riddle_solutions.status is true')
-              .group(:id).order('count(crypto_riddle_solutions.id) DESC')
+                                          .where('crypto_riddle_solutions.status is true')
+                                          .group(:id).order('count(crypto_riddle_solutions.id) DESC')
 
             render json: CryptoParticipationSerializer.new(result,
                                                            params: { basic: true,

@@ -20,7 +20,7 @@ Trestle.resource(:bonus_points) do
 
     row do
       col { text_field :points }
-      col {  text_field :lat }
+      col { text_field :lat }
       col { text_field :lon }
       col { select :event_id, Event.all.map { |e| [e.year, e.id] }, label: 'Event' }
     end

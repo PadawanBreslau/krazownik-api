@@ -2,6 +2,10 @@ class CryptoParticipation < ApplicationRecord
   belongs_to :participation
   has_many :crypto_riddle_solutions
 
+  def crypto_challenge
+    participation.event.crypto_challenge
+  end
+
   def solutions_size
     crypto_riddle_solutions.size
   end

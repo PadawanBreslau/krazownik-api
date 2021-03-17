@@ -6,6 +6,7 @@ AllCops:
     - '**/config.ru'
     - '**/Rakefile'
     - 'bin/**/*'
+    - 'app/admin/**/*'
     - 'db/**/*'
     - 'config/**/*'
     - 'vendor/**/*'

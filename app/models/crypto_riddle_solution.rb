@@ -5,6 +5,7 @@ class CryptoRiddleSolution < ApplicationRecord
   validate :too_many_answers
   validates :answer, presence: true
   after_create :check_answer
+  after_create :set_if_finished
 
   def too_many_answers
     errors.add(:answer, 'Wyczerpałeś limit prób. Spróbuj za rok :P') if crypto_participation.solutions_size >= 10
@@ -16,6 +17,12 @@ class CryptoRiddleSolution < ApplicationRecord
       update(good_answer_id: @riddle.id)
     end
   end
+
+  def set_if_finished
+    crypto_challenge.set_winner! if crypto_challenge.finished? && crypto_challenge.winner_participation_id.blank?
+  end
+
+  private
 
   def find_riddle_with_that_answer
     crypto_participation.reload

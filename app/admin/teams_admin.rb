@@ -12,7 +12,7 @@ Trestle.resource(:teams) do
   form do |team|
     row do
       col { text_field :name }
-      col { select :event_id, Event.all.map{ |e| [e.year, e.id] }, label: 'Event' }
+      col { select :event_id, Event.all.map { |e| [e.year, e.id] }, label: 'Event' }
     end
 
     row do
