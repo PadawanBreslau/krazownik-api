@@ -12,6 +12,10 @@ class Event < ApplicationRecord
   store :informations, accessors: [:date, :place, :base_location, :lat, :lon, :url,
                                    :regulations_url, :fb_event_url, :accomodation_lat, :accomodation_lon]
 
+  def self.current
+    where(year: Time.current.year).first
+  end
+
   def self.recent
     where('? >  start_time', Time.current.to_date).order('start_time DESC').first
   end

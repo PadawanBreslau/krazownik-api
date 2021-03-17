@@ -22,4 +22,8 @@ class CryptoParticipationSerializer
   attribute :avatar do |object|
     object.participation.user.avatar
   end
+
+  attribute :winner do |object|
+    Event.current&.crypto_challenge&.winner_participation_id == object.participation_id
+  end
 end

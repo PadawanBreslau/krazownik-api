@@ -16,11 +16,16 @@ class User < ActiveRecord::Base
   has_many :participations, dependent: :destroy
 
   validates :name, presence: true
+  validates :role, inclusion: { in: %w(user admin) }
   validates :birthyear, inclusion: { in: (1920..2030) },
                         unless: -> { birthyear.blank? }
 
   def current_participation
     participations&.max_by { |p| p.event.year }
+  end
+
+  def admin?
+    role == 'admin'
   end
 
   def age

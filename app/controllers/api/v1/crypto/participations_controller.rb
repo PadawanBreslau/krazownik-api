@@ -26,6 +26,16 @@ module Api
             render json: {}
           end
         end
+
+        def own
+          event = Event.current
+          crypto_participation = CryptoParticipation.joins(:participation)
+                                                    .where('participations.event_id = ? AND participations.user_id = ?',
+                                                           event.id, current_api_v1_user.id)
+          authorize crypto_participation
+
+          render json: CryptoParticipationSerializer.new(crypto_participation).serialized_json
+        end
       end
     end
   end

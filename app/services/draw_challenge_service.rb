@@ -27,12 +27,14 @@ class DrawChallengeService
 
     @possible_challenges = Challenge.current(SelectProperYearLogic.year)
                                     .hidden.where.not(id: @current_challenges.map(&:id))
-                                    .includes([:event, :challenge_completions, :challenge_conditions, icon_attachment: :blob])
+                                    .includes([:event, :challenge_completions,
+                                               :challenge_conditions, icon_attachment: :blob])
                                     .select { |c| c.points == max_points }
   end
 
   def randomize_challenge
     @challenge = @possible_challenges.sample
-    ChallengeCompletion.create(challenge: @challenge, participation: @participation, completed: false)
+    ChallengeCompletion.create(challenge: @challenge, participation: @participation,
+                               completed: false)
   end
 end

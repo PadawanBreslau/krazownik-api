@@ -9,7 +9,7 @@ module Api
 
         options = {
           include: [:challenge_conditions, :challenge_completions],
-          params: {user: current_api_v1_user}
+          params: { user: current_api_v1_user }
         }
 
         render json: ChallengeSerializer.new(challenge,
@@ -23,7 +23,7 @@ module Api
         event = Event.find_by(year: year)
         options = {
           include: [:challenge_conditions, :challenge_completions],
-          params: {user: current_api_v1_user}
+          params: { user: current_api_v1_user }
         }
 
         challenges = event&.challenges&.where(open: true)&.includes(
@@ -37,11 +37,11 @@ module Api
         service = DrawChallengeService.new(params: jsonapi_params.permit(:max_points), user: current_api_v1_user)
         options = {
           include: [:challenge_conditions, :challenge_completions, :event],
-          params: {user: current_api_v1_user}
+          params: { user: current_api_v1_user }
         }
 
         if service.call
-          render json: ChallengeSerializer.new(service.challenge, options ).serialized_json
+          render json: ChallengeSerializer.new(service.challenge, options).serialized_json
         else
           render_error(status: :unprocessable_entity, title: service.error)
         end

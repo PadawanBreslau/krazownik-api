@@ -22,7 +22,8 @@ RSpec.describe CryptoChallenge do
     participation = create(:participation, event: event)
     crypto_participation = create(:crypto_participation, participation: participation)
 
-    create(:crypto_riddle_solution, crypto_participation: crypto_participation, crypto_challenge: crypto_challenge, answer: 'tatanka')
+    create(:crypto_riddle_solution, crypto_participation: crypto_participation,
+                                    crypto_challenge: crypto_challenge, answer: 'tatanka')
     expect(crypto_challenge.crypto_participations).to eq [crypto_participation]
     expect(crypto_challenge.finished?).to be(false)
     expect(crypto_challenge.crypto_riddles.size).to eq 5
@@ -31,5 +32,22 @@ RSpec.describe CryptoChallenge do
   end
 
   it 'creates challenge, answer all questions' do
+    event = create(:event)
+    crypto_challenge = create(:crypto_challenge, event: event)
+    create(:crypto_riddle, crypto_challenge: crypto_challenge, solution: 'Krowa')
+    create(:crypto_riddle, crypto_challenge: crypto_challenge, solution: 'Ośmiornica')
+    participation = create(:participation, event: event)
+    crypto_participation = create(:crypto_participation, participation: participation)
+
+    create(:crypto_riddle_solution, crypto_participation: crypto_participation,
+                                    crypto_challenge: crypto_challenge, answer: 'Krowa')
+    create(:crypto_riddle_solution, crypto_participation: crypto_participation,
+                                    crypto_challenge: crypto_challenge, answer: 'Morszczuk')
+    create(:crypto_riddle_solution, crypto_participation: crypto_participation,
+                                    crypto_challenge: crypto_challenge, answer: 'Osmiornica')
+    expect(crypto_challenge.crypto_participations).to eq [crypto_participation]
+    expect(crypto_challenge.finished?).to be(true)
+    expect(crypto_participation.good_solutions.size).to eq 2
+    expect(crypto_participation.bad_solutions.size).to eq 1
   end
 end

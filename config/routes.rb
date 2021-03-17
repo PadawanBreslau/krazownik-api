@@ -69,7 +69,11 @@ Rails.application.routes.draw do
       resources :gpx_points, only: [:index]
 
       namespace :crypto do
-        resources :participations, only: [:show, :index]
+        resources :participations, only: [:show, :index] do
+          collection do
+            get :own
+          end
+        end
         resources :riddle_solutions, only: [:index, :create]
       end
     end
