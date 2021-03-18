@@ -12,6 +12,10 @@ class UserSerializer
   attributes :name, :email, :phone_number, :send_messages, :send_riddles, :birthyear,
              :created_at, :privacy_policy_accepted, :team_ready, :about_me, :viewable
 
+  attributes :last_participation_year do |object|
+    object.current_participation&.event&.year
+  end
+
   attribute :avatar do |object|
     image_path(object: object, image_field: :avatar, resize: '120x120')
   end
