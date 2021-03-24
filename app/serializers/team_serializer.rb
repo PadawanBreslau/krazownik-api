@@ -12,6 +12,10 @@ class TeamSerializer
     image_path(object: object, image_field: :emblem, resize: '200x200')
   end
 
+  attribute :own do |object, params|
+    params[:user]&.belongs_to?(object)
+  end
+
   has_many :participations
-  has_many :photos
+  has_many :team_tasks
 end

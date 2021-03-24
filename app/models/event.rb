@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   has_many :bonus_points
   has_many :riddles
   has_many :track_files
+  has_many :teams
   has_one :crypto_challenge
 
   validates :start_time, presence: true

@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   validates :birthyear, inclusion: { in: (1920..2030) },
                         unless: -> { birthyear.blank? }
 
+  def belongs_to?(team)
+    current_participation.in?(team.participations)
+  end
+
   def current_participation
     participations&.max_by { |p| p.event.year }
   end

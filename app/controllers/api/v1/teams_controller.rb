@@ -5,8 +5,10 @@ module Api
         team = Team.find_by(id: params[:id])
         authorize team
 
-        options = { include: [:participations, :photos] }
-
+        options = {
+          include: [:participations, :team_tasks],
+          params: { user: current_api_v1_user }
+        }
         render json: TeamSerializer.new(team, options).serialized_json
       end
 

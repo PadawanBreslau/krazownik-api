@@ -3,6 +3,8 @@ class CryptoChallenge < ApplicationRecord
   has_many :crypto_riddles
   has_many :crypto_riddle_solutions
 
+  delegate :year, to: :event
+
   def crypto_participations
     Participation.where(event: event).map(&:crypto_participation).compact
   end
