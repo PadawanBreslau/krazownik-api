@@ -16,6 +16,14 @@ class UserSerializer
     object.current_participation&.event&.year
   end
 
+  attribute :phone_number do |object, params|
+    object.phone_number if params[:user]&.allowed_to_contact?(object)
+  end
+
+  attribute :email do |object, params|
+    object.email if params[:user]&.allowed_to_contact?(object)
+  end
+
   attribute :avatar do |object|
     image_path(object: object, image_field: :avatar, resize: '120x120')
   end

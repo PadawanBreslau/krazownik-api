@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_110046) do
+ActiveRecord::Schema.define(version: 2021_03_25_112422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,16 @@ ActiveRecord::Schema.define(version: 2021_03_18_110046) do
     t.index ["event_id"], name: "index_riddles_on_event_id"
   end
 
+  create_table "team_task_photos", force: :cascade do |t|
+    t.boolean "accepted"
+    t.bigint "user_id", null: false
+    t.bigint "team_task_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_task_id"], name: "index_team_task_photos_on_team_task_id"
+    t.index ["user_id"], name: "index_team_task_photos_on_user_id"
+  end
+
   create_table "team_tasks", force: :cascade do |t|
     t.string "content", null: false
     t.text "description"
@@ -327,5 +337,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_110046) do
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
   add_foreign_key "results", "participations"
+  add_foreign_key "team_task_photos", "team_tasks"
+  add_foreign_key "team_task_photos", "users"
   add_foreign_key "team_tasks", "teams"
 end

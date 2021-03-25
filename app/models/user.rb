@@ -24,6 +24,14 @@ class User < ActiveRecord::Base
     current_participation.in?(team.participations)
   end
 
+  def allowed_to_contact?(different_user)
+    admin? || self == different_user || same_team?(different_user)
+  end
+
+  def same_team?(different_user)
+    current_participation.team == different_user.current_participation.team
+  end
+
   def current_participation
     participations&.max_by { |p| p.event.year }
   end

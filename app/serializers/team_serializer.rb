@@ -13,7 +13,11 @@ class TeamSerializer
   end
 
   attribute :own do |object, params|
-    params[:user]&.belongs_to?(object)
+    params[:user]&.belongs_to?(object) || false
+  end
+
+  attribute :leader do |obejct, params|
+    params[:user]&.current_participation&.id == obejct.leader_participation_id
   end
 
   has_many :participations

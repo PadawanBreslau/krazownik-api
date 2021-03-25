@@ -1,5 +1,6 @@
 class ParticipationSerializer
   include FastJsonapi::ObjectSerializer
+  include ImageHelper
 
   set_key_transform :underscore
   set_type :participation
@@ -17,12 +18,20 @@ class ParticipationSerializer
     object.user.name
   end
 
+  attribute :user_id do |object|
+    object.user.id
+  end
+
   attribute :year do |object|
     object.event.year
   end
 
   attribute :event_started do |object|
     object.event.started?
+  end
+
+  attribute :avatar do |object|
+    image_path(object: object.user, image_field: :avatar, resize: '120x120')
   end
 
   attributes :total_distance_points, :total_ascent_points

@@ -16,9 +16,23 @@ module Api
         authorize Team
 
         teams = Team.all.select(&:visible?)
-        options = { include: [:participations] }
+        options = {
+          include: [:participations],
+          params: { user: current_api_v1_user }
+        }
 
         render json: TeamSerializer.new(teams, options).serialized_json
+      end
+
+      def panel
+        team = current_api_v1_user.current_participation.team
+        authorize team
+
+        options = {
+          include: [:participations, :team_tasks, :team_task_photos],
+          params: { user: current_api_v1_user }
+        }
+        render json: TeamSerializer.new(team, options).serialized_json
       end
     end
   end

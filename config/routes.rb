@@ -22,7 +22,6 @@ Rails.application.routes.draw do
         end
       end
       resources :events, only: [:index]
-      resources :notes, only: [:index]
       resources :challenges, only: [:show, :index] do
         collection do
           post :draw
@@ -34,7 +33,17 @@ Rails.application.routes.draw do
       end
       resources :riddles, only: [:show, :index]
       resources :results, only: [:index]
-      resources :teams, only: [:show, :index]
+      resources :teams, only: [:show, :index] do
+        resources :team_tasks do
+          member do
+            post :photo
+          end
+        end
+
+        collection do
+          get :panel
+        end
+      end
       resources :photos, only: [:index, :show]
       resources :files, only: [:index] do
         collection do
