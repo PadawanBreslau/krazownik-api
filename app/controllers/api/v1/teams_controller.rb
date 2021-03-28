@@ -25,14 +25,19 @@ module Api
       end
 
       def panel
-        team = current_api_v1_user.current_participation.team
-        authorize team
+        team = current_api_v1_user&.current_participation&.team
 
-        options = {
-          include: [:participations, :team_tasks, :team_task_photos],
-          params: { user: current_api_v1_user }
-        }
-        render json: TeamSerializer.new(team, options).serialized_json
+        if team
+          authorize team
+
+          options = {
+            include: [:participations, :team_tasks, :'team_tasks.team_task_photos'],
+            params: { user: current_api_v1_user }
+          }
+          render json: TeamSerializer.new(team, options).serialized_json
+        else
+          render_error(status: :forbidden, title: 'User as a part of the team required') unless team
+        end
       end
     end
   end

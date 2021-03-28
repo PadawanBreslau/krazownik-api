@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
   has_many :participations, dependent: :nullify
   has_many :team_tasks, dependent: :nullify
+  has_many :team_tasks_photos, through: :team_tasks
   belongs_to :event
 
   has_one_attached :emblem
@@ -11,6 +12,10 @@ class Team < ApplicationRecord
 
   def leader
     Participation.find_by(id: leader_participation_id)
+  end
+
+  def leader?(participation)
+    leader == participation
   end
 
   def photos

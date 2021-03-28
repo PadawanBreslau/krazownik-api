@@ -7,11 +7,13 @@ module Api
 
         task = team.team_tasks.find(params['id'])
 
-        require 'pry'; binding.pry
-        service = UploadTaskPhotoService.new(user: user, params: upload_file_params)
+        service = UploadTaskPhotoService.new(user: current_api_v1_user, task: task, params: upload_file_params)
         if service.call
-          attachments = current_api_v1_user.current_participation&.tracks
-          render json: FileSerializer.new(attachments).serialized_json, status: :ok
+          options = {
+            include: [:participations, :team_tasks, :'team_tasks.team_task_photos'],
+            params: { user: current_api_v1_user }
+          }
+          render json: TeamSerializer.new(team, options).serialized_json
         else
           render_validation_errors(service.errors)
         end

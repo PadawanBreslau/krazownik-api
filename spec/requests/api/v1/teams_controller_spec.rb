@@ -26,7 +26,7 @@ describe Api::V1::TeamsController do
       body = JSON.parse(response.body)['data']
       included = JSON.parse(response.body)['included']
       expect(body.dig('relationships', 'team_tasks')).to be_present
-      expect(included.last['type']).to eq 'team_tasks'
+      expect(included.last['type']).to eq 'team_task'
       expect(included.last['id']).to eq task.id.to_s
     end
 

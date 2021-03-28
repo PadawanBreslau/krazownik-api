@@ -44,6 +44,7 @@ Rails.application.routes.draw do
           get :panel
         end
       end
+      resources :team_task_photos, only: [:show, :update, :destroy]
       resources :photos, only: [:index, :show]
       resources :files, only: [:index] do
         collection do
