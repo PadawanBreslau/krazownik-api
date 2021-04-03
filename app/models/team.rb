@@ -31,4 +31,10 @@ class Team < ApplicationRecord
 
     event.start_time - Time.current < 11.months && event.start_time > Time.current + 1.month
   end
+
+  def complete!
+    update(completed_at: Time.current)
+    # send SMS to team
+    # send SMS to me
+  end
 end
