@@ -6,14 +6,14 @@ class TeamTaskPhotoSerializer
   set_type :team_task_photo
   set_id :id
 
-  attribute :approved_by_leader
+  attribute :accepted
 
   attribute :username do |object|
     object.user.name
   end
 
   attribute :created_at do |object|
-    object.created_at.strftime("%R %F")
+    object.created_at.strftime('%R %F')
   end
 
   attribute :task_name do |object|

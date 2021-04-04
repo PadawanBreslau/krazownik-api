@@ -16,7 +16,7 @@ module Api
         photo = TeamTaskPhoto.find(params['id'])
         authorize photo
 
-        photo.update(approved_by_leader: photo_params['approved_by_leader'])
+        photo.update(accepted: photo_params['accepted'])
 
         options = {
           params: { user: current_api_v1_user }
@@ -35,7 +35,7 @@ module Api
       end
 
       def photo_params
-        jsonapi_params.permit('approved_by_leader')
+        jsonapi_params.permit('accepted')
       end
     end
   end
