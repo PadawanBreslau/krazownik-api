@@ -37,7 +37,7 @@ class Participation < ApplicationRecord
   end
 
   def total_ascent_points
-    ((gpx_tracks.map { |track| track.total_ascent * track.multiplier }.inject(:+).to_f * 0.75) / 100.0).to_i
+    ((gpx_tracks.map { |track| track.total_ascent * track.multiplier }.inject(:+).to_f * 1.5) / 100.0).to_i
   end
 
   def files
