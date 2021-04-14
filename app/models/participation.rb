@@ -33,11 +33,15 @@ class Participation < ApplicationRecord
   end
 
   def total_distance_points
-    gpx_tracks.map { |track| track.total_distance * track.multiplier }.inject(:+).to_i
+    track_files.map { |track| track.distance * track.multiplier }.inject(:+).to_i
   end
 
   def total_ascent_points
-    ((gpx_tracks.map { |track| track.total_ascent * track.multiplier }.inject(:+).to_f * 1.5) / 100.0).to_i
+    ((track_files.map { |track| track.ascent * track.multiplier }.inject(:+).to_f * 1.5) / 100.0).to_i
+  end
+
+  def track_files
+    TrackFile.where(user: user, event: event)
   end
 
   def files
