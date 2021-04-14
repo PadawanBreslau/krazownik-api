@@ -9,7 +9,7 @@ Trestle.resource(:events) do
     tab :basic do
       row do
         col { number_field :year }
-        col { datetime_field :date }
+        col { datetime_field :start_time }
       end
 
       row do
