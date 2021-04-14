@@ -14,9 +14,11 @@ class TrackFile < ApplicationRecord
   store :metadata, accessors: [:distance, :ascent, :descent, :total_time, :start_time, :start_date]
 
   class << self
-    User.where(id: TrackFile.all.map(&:user_id))&.each do |u|
-      define_method(u.unique_name) do
-        Photo.all.select { |p| p.user_id = u.id }
+    if database_exists? && db_table_exists?('users') && db_table_exists?('track_files')
+      User.where(id: TrackFile.all.map(&:user_id))&.each do |u|
+        define_method(u.unique_name) do
+          Photo.all.select { |p| p.user_id = u.id }
+        end
       end
     end
   end

@@ -1,8 +1,10 @@
 Trestle.resource(:track_files) do
   scope :all
 
-  User.where(id: TrackFile.all.map(&:user_id))&.each do |u|
-    scope u.unique_name.to_sym, label: u.name
+  if database_exists? && db_table_exists?('users') && db_table_exists?('track_files')
+    User.where(id: TrackFile.all.map(&:user_id))&.each do |u|
+      scope u.unique_name.to_sym, label: u.name
+    end
   end
 
   menu do
