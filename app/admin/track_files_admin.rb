@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 Trestle.resource(:track_files) do
   scope :all
 
