@@ -46,8 +46,9 @@ describe Api::V1::TeamsController do
 
   describe 'index' do
     it 'shows teams' do
+      event = create(:event, year: Date.today.year)
       participation = create(:participation)
-      team = create(:team, name: 'Chelsea')
+      team = create(:team, name: 'Chelsea', event: event)
       team.participations << participation
 
       get '/api/v1/teams/', headers: json_api_headers

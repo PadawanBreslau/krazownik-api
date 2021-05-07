@@ -29,7 +29,7 @@ class Team < ApplicationRecord
   def visible?
     return false unless event.start_time
 
-    event.start_time - Time.current < 11.months && event.start_time > Time.current + 1.month
+    event == Event.current
   end
 
   def complete_team_tasks!
