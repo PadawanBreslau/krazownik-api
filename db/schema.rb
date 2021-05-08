@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_060946) do
+ActiveRecord::Schema.define(version: 2021_05_08_073531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,7 +252,6 @@ ActiveRecord::Schema.define(version: 2021_04_03_060946) do
     t.bigint "team_task_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "approved_by_leader", default: false
     t.index ["team_task_id"], name: "index_team_task_photos_on_team_task_id"
     t.index ["user_id"], name: "index_team_task_photos_on_user_id"
   end
