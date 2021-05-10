@@ -21,7 +21,7 @@ class DrawChallengeService
     max_points = (@params[:max_points] || 3).to_i
 
     @participation = @user.current_participation
-    (@error = 'No participation found') && return unless @participation
+    (@error = 'No participation found') && return if @participation.blank?
 
     @current_challenges = @participation.challenge_completions&.map(&:challenge)
 
@@ -37,7 +37,7 @@ class DrawChallengeService
 
   def randomize_challenge
     @challenge = @possible_challenges.sample
-    ChallengeCompletion.create(challenge: @challenge, participation: @participation,
+    ChallengeCompletion.create!(challenge: @challenge, participation: @participation,
                                completed: false)
   end
 end
