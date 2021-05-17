@@ -30,6 +30,7 @@ gem 'time_difference'
 gem 'trestle'
 gem 'trestle-active_storage'
 gem 'trestle-auth'
+gem 'trestle-search'
 
 group :development, :test do
   gem 'bullet'

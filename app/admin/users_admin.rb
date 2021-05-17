@@ -3,6 +3,18 @@ Trestle.resource(:users) do
     item :users, icon: 'fa fa-star'
   end
 
+   scope :all
+   scope :current, -> { User.left_joins(:participations).where('event_id = ?', Event.current.id) }, default: true
+
+
+  search do |query|
+    if query
+      User.where("name ILIKE ? OR email ILINE ?", "%#{query}%", "%#{query}%")
+    else
+      User.all
+    end
+  end
+
   table do
     column :email
     column :name
