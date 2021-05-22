@@ -15,8 +15,9 @@ describe Api::V1::TeamsController do
     end
 
     it 'show team tasks' do
-      participation = create(:participation)
-      team = create(:team, name: 'Arsenal')
+      event = create(:event, start_time: Time.current - 1.hour)
+      participation = create(:participation, event: event)
+      team = create(:team, name: 'Arsenal', event: event)
       task = create(:team_task, team: team)
 
       team.participations << participation
@@ -28,6 +29,21 @@ describe Api::V1::TeamsController do
       expect(body.dig('relationships', 'team_tasks')).to be_present
       expect(included.last['type']).to eq 'team_task'
       expect(included.last['id']).to eq task.id.to_s
+    end
+
+    it 'dont show team tasks if event not started' do
+      event = create(:event, start_time: Time.current + 1.hour)
+      participation = create(:participation, event: event)
+      team = create(:team, name: 'Arsenal', event: event)
+      task = create(:team_task, team: team)
+
+      team.participations << participation
+      get "/api/v1/teams/#{team.id}", headers: json_api_headers
+      expect(response).to have_http_status :ok
+
+      body = JSON.parse(response.body)['data']
+      included = JSON.parse(response.body)['included']
+      expect(body.dig('relationships', 'team_tasks')).not_to be_present
     end
 
     it 'shows that this is your own team' do

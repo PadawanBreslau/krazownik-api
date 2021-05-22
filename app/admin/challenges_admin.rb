@@ -13,7 +13,7 @@ Trestle.resource(:challenges) do
     [:icon]
   end
 
-  form do |_challenge|
+  form do
     row do
       col { text_field :title }
       col { text_field :points }
