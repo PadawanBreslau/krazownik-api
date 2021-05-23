@@ -11,5 +11,5 @@ class TeamTaskSerializer
     ((object.team_task_photos.where(accepted: true).count * 100) / object.amount.to_f).round(1)
   end
 
-  attribute :content, :description, :amount, :approved_by_leader
+  attributes :content, :description, :amount, :approved_by_leader
 end

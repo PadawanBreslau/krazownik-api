@@ -5,6 +5,9 @@ Trestle.resource(:teams) do
     end
   end
 
+  scope :current, -> { Team.current }, default: true
+  scope :all
+
   active_storage_fields do
     [:emblem]
   end
