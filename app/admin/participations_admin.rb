@@ -32,5 +32,9 @@ Trestle.resource(:participations) do
     column :phone do |object|
       object.user.phone_number
     end
+
+    actions do |toolbar, instance, admin|
+      toolbar.edit
+    end
   end
 end
