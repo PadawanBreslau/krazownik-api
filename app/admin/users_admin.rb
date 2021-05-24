@@ -9,7 +9,7 @@ Trestle.resource(:users) do
 
   search do |query|
     if query
-      User.where("name ILIKE ? OR email ILINE ?", "%#{query}%", "%#{query}%")
+      User.where("name ILIKE ? OR email ILIKE ?", "%#{query}%", "%#{query}%")
     else
       User.all
     end
