@@ -15,7 +15,7 @@ module Mailjet
       request['Authorization'] = "Bearer #{ENV['SMS_TOKEN']}"
       request.body = JSON.dump(
         'From' => 'Krazownik',
-        'To' => @phone.number,
+        'To' => @phone,
         'Text' => @content
       )
 
