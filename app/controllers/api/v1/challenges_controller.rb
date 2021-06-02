@@ -22,12 +22,11 @@ module Api
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
         options = {
-          include: [:challenge_conditions, :challenge_completions],
           params: { user: current_api_v1_user }
         }
 
         challenges = event&.challenges&.where(open: true)&.includes(
-          [:challenge_completions, :challenge_conditions, icon_attachment: :blob])
+          [icon_attachment: :blob])
         render json: ChallengeSerializer.new(challenges, options).serialized_json
       end
 
