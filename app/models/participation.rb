@@ -33,11 +33,13 @@ class Participation < ApplicationRecord
   end
 
   def total_distance_points
-    track_files.map { |track| track.distance * track.multiplier }.inject(:+).to_i
+    return 0.0 unless track_files
+    track_files.map { |track| track.distance.to_f * track.multiplier }.inject(:+)&.to_i
   end
 
   def total_ascent_points
-    ((track_files.map { |track| track.ascent * track.multiplier }.inject(:+).to_f * 1.5) / 100.0).to_i
+    return 0.0 unless track_files
+    ((track_files.map { |track| track.ascent.to_f * track.multiplier }.inject(:+).to_f * 1.5) / 100.0).to_i
   end
 
   def track_files
