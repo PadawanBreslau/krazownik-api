@@ -32,13 +32,19 @@ class Participation < ApplicationRecord
     CreateResultService.new(participation: self, result: logic.result, total: logic.total).call
   end
 
+  def completed_bonus_point_ids
+    bonus_point_completions&.where(completed: true)&.map(&:bonus_point_id)
+  end
+
   def total_distance_points
     return 0.0 unless track_files
+
     track_files.map { |track| track.distance.to_f * track.multiplier }.inject(:+)&.to_i
   end
 
   def total_ascent_points
     return 0.0 unless track_files
+
     ((track_files.map { |track| track.ascent.to_f * track.multiplier }.inject(:+).to_f * 1.5) / 100.0).to_i
   end
 

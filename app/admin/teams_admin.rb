@@ -1,7 +1,7 @@
 Trestle.resource(:teams) do
   menu do
-    group :event do
-      item :teams, icon: 'fa fa-star'
+    group :teams do
+      item :teams, icon: 'fa fa-flag'
     end
   end
 

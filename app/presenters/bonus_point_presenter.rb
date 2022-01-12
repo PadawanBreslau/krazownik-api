@@ -1,13 +1,14 @@
 class BonusPointPresenter
   delegate_missing_to :@bonus_point
 
-  def initialize(bonus_point, user_context:)
+  def initialize(bonus_point, completed_ids)
     @bonus_point = bonus_point
-    @user_context = user_context
+    @completed_ids = completed_ids
   end
 
   def completed
-    @user_context&.current_participation&.bonus_point_completions&.where(completed: true)
-      &.map(&:bonus_point_id)&.include?(@bonus_point.id)
+    return false if @completed_ids.blank?
+
+    @completed_ids.include?(@bonus_point.id)
   end
 end

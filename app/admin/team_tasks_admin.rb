@@ -1,6 +1,6 @@
 Trestle.resource(:team_tasks) do
   menu do
-    group :event do
+    group :teams do
       item :team_tasks, icon: 'fa fa-star'
     end
   end

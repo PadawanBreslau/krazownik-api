@@ -10,8 +10,8 @@ class Event < ApplicationRecord
 
   validates :start_time, presence: true
 
-  store :informations, accessors: [:date, :place, :base_location, :lat, :lon, :url,
-                                   :regulations_url, :fb_event_url, :accomodation_lat, :accomodation_lon]
+  store :informations, accessors: [:date, :place, :phone, :base_location, :base_address, :lat, :lon, :url,
+                                   :regulations_url, :fb_event_url]
 
   def self.current
     where(year: Time.current.year).first
@@ -31,6 +31,10 @@ class Event < ApplicationRecord
 
   def started?
     start_time && start_time < Time.current
+  end
+
+  def accomodation_coords
+    [lat.to_f, lon.to_f]
   end
 
   alias_attribute :to_s, :year

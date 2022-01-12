@@ -1,6 +1,6 @@
 class TeamTask < ApplicationRecord
+  default_scope { order('amount DESC') }
   belongs_to :team
-
   has_many :team_task_photos
 
   def all_accepted?

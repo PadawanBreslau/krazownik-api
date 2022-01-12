@@ -17,11 +17,13 @@ module Api
         year = SelectProperYearLogic.year
         event = Event.find_by(year: year)
 
-        formatted_bonus_points = event.bonus_points&.includes([:image_attachment])&.map do |bp|
-          BonusPointPresenter.new(bp, user_context: current_api_v1_user)
+        formatted_bonus_points = event.bonus_points&.map do |bp|
+          BonusPointPresenter.new(bp, current_api_v1_user&.current_participation&.completed_bonus_point_ids)
         end
 
-        render json: BonusPointSerializer.new(formatted_bonus_points).serialized_json
+        options = { meta: event.accomodation_coords }
+
+        render json: BonusPointSerializer.new(formatted_bonus_points, options).serialized_json
       end
 
       def toggle

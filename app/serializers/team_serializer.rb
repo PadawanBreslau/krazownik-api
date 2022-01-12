@@ -21,5 +21,5 @@ class TeamSerializer
   end
 
   has_many :participations
-  has_many :team_tasks, if: Proc.new { Event.current.started? }
+  has_many :team_tasks, if: proc { Event.current.started? }
 end

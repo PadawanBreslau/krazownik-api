@@ -5,5 +5,5 @@ class EventSerializer
   set_type :event
   set_id :id
 
-  attributes :year, :informations
+  attributes :year, :start_time, :informations
 end

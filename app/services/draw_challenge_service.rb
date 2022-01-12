@@ -26,10 +26,10 @@ class DrawChallengeService
     @current_challenges = @participation.challenge_completions&.map(&:challenge)
 
     @possible_challenges = Challenge.current(SelectProperYearLogic.year)
-      .hidden.where.not(id: @current_challenges.map(&:id))
-      .includes([:event, :challenge_completions,
-                 :challenge_conditions, icon_attachment: :blob])
-      .select { |c| c.points == max_points }
+                                    .hidden.where.not(id: @current_challenges.map(&:id))
+                                    .includes([:event, :challenge_completions,
+                                               :challenge_conditions, icon_attachment: :blob])
+                                    .select { |c| c.points == max_points }
   rescue StandardError => e
     Rollbar.error(e.message, user: @user)
     @error = e.message
@@ -38,6 +38,6 @@ class DrawChallengeService
   def randomize_challenge
     @challenge = @possible_challenges.sample
     ChallengeCompletion.create!(challenge: @challenge, participation: @participation,
-                               completed: false)
+                                completed: false)
   end
 end
